@@ -10,7 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_175900) do
+ActiveRecord::Schema.define(version: 2019_04_13_202437) do
+
+  create_table "genders", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orientations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pronouns", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_genders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "gender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_orientations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "orientation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_pronouns", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "pronoun_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -25,6 +64,7 @@ ActiveRecord::Schema.define(version: 2019_04_13_175900) do
     t.boolean "moderator", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "online"
   end
 
 end
