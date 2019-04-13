@@ -20,7 +20,7 @@
     <p><%= f.label "Enter your password (must be between 6-16 characters long):" %></p>
     <p><%= f.text_field :password %></p>
     <p><%= f.label "Enter your birthday:" %></p>
-    <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 100, end_year: Date.today.year) %></p>
+    <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %></p>
     <p><%= f.label "Enter in your location (optional):" %></p>
     <p><%= f.text_field :location %></p>
     <p><%= f.label "Enter some quick information about yourself (optional):" %></p>
