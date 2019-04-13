@@ -1,0 +1,32 @@
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+    <h2 style="color: red">There were some errors with the info you entered into the form:</h2>
+    <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li><p style="color:red"><%= message %></p></li>
+        <% end %>
+    </ul>
+    </div>
+    <br>
+    <br>
+<% end %>
+
+
+<%= form_for(@user) do |f| %>
+    <p><%= f.label "Enter your user name:" %></p>
+    <p><%= f.text_field :username %></p>
+    <p><%= f.label "Enter your email address:" %></p>
+    <p><%= f.text_field :email %></p>
+    <p><%= f.label "Enter your password (must be between 6-16 characters long):" %></p>
+    <p><%= f.text_field :password %></p>
+    <p><%= f.label "Enter your birthday:" %></p>
+    <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 100, end_year: Date.today.year) %></p>
+    <p><%= f.label "Enter in your location (optional):" %></p>
+    <p><%= f.text_field :location %></p>
+    <p><%= f.label "Enter some quick information about yourself (optional):" %></p>
+    <p><%= f.text_area :bio %></p>
+
+    <br>
+    <br>
+    <%= f.submit %>
+<% end %>
