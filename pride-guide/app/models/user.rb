@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+    has_secure_password
+
     has_many :pronouns, through: :user_pronouns
     has_many :genders, through: :user_genders
     has_many :orientations, through: :user_orientations
