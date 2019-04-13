@@ -23,14 +23,33 @@
     <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 100, end_year: Date.today.year) %></p>
     <p><%= f.label "Enter in your location (optional):" %></p>
     <p><%= f.text_field :location %></p>
-    <p></p>
-    <p></p>
-    <p></p>
+    <p><%= f.label "Check the gender(s) that you associate with:" %></p>
+    <p>
+        <%= f.collection_check_boxes(:gender_ids, Gender.all, :id, :name) do |g| %>
+            <%= g.check_box %>
+            <%= g.label %>
+            <br>
+        <% end %>
+    </p>
+    <p><%= f.label "Check the pronoun(s) you prefer to go by:" %></p>
+    <p>
+        <%= f.collection_check_boxes(:pronoun_ids, Pronoun.all, :id, :name) do |g| %>
+            <%= g.check_box %>
+            <%= g.label %>
+            <br>
+        <% end %>
+    </p>
+        <p><%= f.label "Check the sexual orientation(s) that you prefer:" %></p>
+    <p>
+        <%= f.collection_check_boxes(:orientation_ids, Orientation.all, :id, :name) do |g| %>
+            <%= g.check_box %>
+            <%= g.label %>
+            <br>
+        <% end %>
+    </p>
     <br>
     <p><%= f.label "Enter some quick information about yourself (optional):" %></p>
     <p><%= f.text_area :bio %></p>
-
-    <br>
     <br>
     <%= f.submit %>
 <% end %>
