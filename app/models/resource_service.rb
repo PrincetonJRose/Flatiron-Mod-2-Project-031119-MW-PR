@@ -1,2 +1,0 @@
-class ResourceService < ApplicationRecord
-end
