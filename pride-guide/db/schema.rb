@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2019_04_14_040012) do
     t.boolean "moderator", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "online"
+    t.string "password_digest"
   end
 
 end

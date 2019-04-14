@@ -1,14 +1,12 @@
 <% if @user.errors.any? %>
     <div id="error_explanation">
-    <h2 style="color: red">There were some errors with the info you entered into the form:</h2>
+    <h3 style="color: red">There were some errors with the info you entered into the form:</h2>
     <ul>
         <% @user.errors.full_messages.each do |message| %>
         <li><p style="color:red"><%= message %></p></li>
         <% end %>
     </ul>
     </div>
-    <br>
-    <br>
 <% end %>
 
 
@@ -18,7 +16,9 @@
     <p><%= f.label "Enter your email address:" %></p>
     <p><%= f.text_field :email %></p>
     <p><%= f.label "Enter your password (must be between 6-16 characters long):" %></p>
-    <p><%= f.text_field :password %></p>
+    <%= f.password_field :password %>
+    <p><%= f.label "Confirm your password:" %></p>
+    <%= f.password_field :password_confirmation %>
     <p><%= f.label "Enter your birthday:" %></p>
     <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %></p>
     <p><%= f.label "Enter in your City and State (optional):" %></p>
@@ -31,8 +31,6 @@
     <p><%= collection_check_boxes(:orientation, :orientation_ids, Orientation.all, :id, :name) %></p>
     <p><%= f.label "Enter some quick information about yourself (optional):" %></p>
     <p><%= f.text_area :bio %></p>
-
-    <br>
     <br>
     <%= f.submit %>
 <% end %>
