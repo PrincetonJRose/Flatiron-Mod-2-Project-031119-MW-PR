@@ -11,7 +11,7 @@ class User < ApplicationRecord
     has_many :pronouns, through: :user_pronouns
     accepts_nested_attributes_for :genders
     
-    
+    validates :username, length: { in: 6..16 }
     validates :username, presence: true
     validates :username, uniqueness: true
     validates :email, presence: true

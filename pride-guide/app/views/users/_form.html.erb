@@ -12,13 +12,24 @@
 
 <%= form_for(@user) do |f| %>
     <p><%= f.label "Enter your user name:" %></p>
+    <p>(must be between 6-16 characters long)</p>
     <p><%= f.text_field :username %></p>
     <p><%= f.label "Enter your email address:" %></p>
     <p><%= f.text_field :email %></p>
-    <p><%= f.label "Enter your password (must be between 6-16 characters long):" %></p>
+    <p><%= f.label "Enter your password:" %><br>
+    (must be between 6-16 characters long)</p>
     <%= f.password_field :password %>
     <p><%= f.label "Confirm your password:" %></p>
     <%= f.password_field :password_confirmation %>
+    <br>
+    <br>
+    <p>(The following fields are optional)</p>
+    <p><%= f.label "Enter your first name:" %></p>
+    <p><%= f.text_field :first_name %></p>
+    <p><%= f.label "Enter your middle initial:" %></p>
+    <p><%= f.text_field :middle_initial %></p>
+    <p><%= f.label "Enter your last name:" %></p>
+    <p><%= f.text_field :last_name %></p>
     <p><%= f.label "Enter your birthday:" %></p>
     <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %></p>
     <p><%= f.label "Enter in your City and State (optional):" %></p>
@@ -53,7 +64,7 @@
     </p>
     <br>
     <p><%= f.label "Enter some quick information about yourself (optional):" %></p>
-    <p><%= f.text_area :bio %></p>
+    <p><%= f.text_area :bio, size: "80x10" %></p>
     <br>
     <%= f.submit %>
 <% end %>
