@@ -1,0 +1,2 @@
+class ResourceOrientation < ApplicationRecord
+end

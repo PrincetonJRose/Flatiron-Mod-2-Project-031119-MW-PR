@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_14_040012) do
+ActiveRecord::Schema.define(version: 2019_04_14_165031) do
 
   create_table "genders", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,62 @@ ActiveRecord::Schema.define(version: 2019_04_14_040012) do
 
   create_table "pronouns", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resouce_genders", force: :cascade do |t|
+    t.integer "gender_id"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gender_id"], name: "index_resouce_genders_on_gender_id"
+    t.index ["resource_id"], name: "index_resouce_genders_on_resource_id"
+  end
+
+  create_table "resource_orientations", force: :cascade do |t|
+    t.integer "orientation_id"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["orientation_id"], name: "index_resource_orientations_on_orientation_id"
+    t.index ["resource_id"], name: "index_resource_orientations_on_resource_id"
+  end
+
+  create_table "resource_services", force: :cascade do |t|
+    t.integer "service_id"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_id"], name: "index_resource_services_on_resource_id"
+    t.index ["service_id"], name: "index_resource_services_on_service_id"
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string "name"
+    t.string "number"
+    t.string "url"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.text "content"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,6 +127,7 @@ ActiveRecord::Schema.define(version: 2019_04_14_040012) do
     t.boolean "moderator", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
 end

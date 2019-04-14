@@ -1,0 +1,2 @@
+class ResouceGender < ApplicationRecord
+end
