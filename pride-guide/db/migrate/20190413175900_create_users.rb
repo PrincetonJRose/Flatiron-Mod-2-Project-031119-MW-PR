@@ -5,7 +5,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string    :email
       t.string    :password
       t.date      :birthdate
-      t.string    :location
+      t.string    :city
+      t.string    :state
       t.text      :bio
       t.boolean   :hidden, default: false
       t.boolean   :verified, default: false

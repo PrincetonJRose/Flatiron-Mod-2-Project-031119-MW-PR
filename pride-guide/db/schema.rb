@@ -10,14 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_175900) do
+ActiveRecord::Schema.define(version: 2019_04_14_040012) do
+
+  create_table "genders", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orientations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pronouns", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_genders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "gender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gender_id"], name: "index_user_genders_on_gender_id"
+    t.index ["user_id"], name: "index_user_genders_on_user_id"
+  end
+
+  create_table "user_orientations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "orientation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["orientation_id"], name: "index_user_orientations_on_orientation_id"
+    t.index ["user_id"], name: "index_user_orientations_on_user_id"
+  end
+
+  create_table "user_pronouns", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "pronoun_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pronoun_id"], name: "index_user_pronouns_on_pronoun_id"
+    t.index ["user_id"], name: "index_user_pronouns_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password"
     t.date "birthdate"
-    t.string "location"
+    t.string "city"
+    t.string "state"
     t.text "bio"
     t.boolean "hidden", default: false
     t.boolean "verified", default: false
