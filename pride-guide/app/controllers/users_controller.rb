@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        raise params.inspect
+        # raise params.inspect
         @user = User.new(user_params)
         # byebug
         if @user.save
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :birthdate, :location, :bio, :email, :password, :password_confirmation, :password_digest, pronoun_ids: [], gender_ids: [], orientation_ids: [])
+        params.require(:user).permit(:username, :birthdate, :bio, :state_id, :city, :email, :password, :password_confirmation, :password_digest, pronoun_ids: [], gender_ids: [], orientation_ids: [])
     end
 
 end

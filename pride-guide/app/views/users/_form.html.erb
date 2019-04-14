@@ -1,6 +1,6 @@
 <% if @user.errors.any? %>
     <div id="error_explanation">
-    <h3 style="color: red">There were some errors with the info you entered into the form:</h2>
+    <h3 style="color: red">There were some errors with the information you entered into the form:</h2>
     <ul>
         <% @user.errors.full_messages.each do |message| %>
         <li><p style="color:red"><%= message %></p></li>
@@ -22,13 +22,36 @@
     <p><%= f.label "Enter your birthday:" %></p>
     <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %></p>
     <p><%= f.label "Enter in your City and State (optional):" %></p>
-    <p><%= f.text_field :city, placeholder: 'City'%><%= f.text_field :state, placeholder: 'State' %></p>
+    <p><%= f.text_field :city, placeholder: 'City'%></p>
+    <p><%= f.collection_select(:state_id, State.all, :id, :state_code, prompt: true) %></p>
+    <br>
     <p><%= f.label "What gender(s) do you indentifty with? (Check all that apply)" %></p>
-    <p><%= collection_check_boxes(:gender, :gender_ids, Gender.all, :id, :name) %></p>
+    <p>
+        <%= f.collection_check_boxes(:gender_ids, Gender.all, :id, :name) do |g| %>
+            <%= g.check_box %>
+            <%= g.label %>
+            <br>
+        <% end %>
+    </p>
+    <br>
     <p><%= f.label "What pronouns(s) do you use? (Check all that apply)" %></p>
-    <p><%= collection_check_boxes(:pronoun, :pronoun_ids, Pronoun.all, :id, :name) %></p>
+    <p>
+        <%= f.collection_check_boxes(:pronoun_ids, Pronoun.all, :id, :name) do |g| %>
+            <%= g.check_box %>
+            <%= g.label %>
+            <br>
+        <% end %>
+    </p>
+    <br>
     <p><%= f.label "What sexual orientatio(s) do you consider yourself? (Check all that apply)" %></p>
-    <p><%= collection_check_boxes(:orientation, :orientation_ids, Orientation.all, :id, :name) %></p>
+    <p>
+        <%= f.collection_check_boxes(:orientation_ids, Orientation.all, :id, :name) do |g| %>
+            <%= g.check_box %>
+            <%= g.label %>
+            <br>
+        <% end %>
+    </p>
+    <br>
     <p><%= f.label "Enter some quick information about yourself (optional):" %></p>
     <p><%= f.text_area :bio %></p>
     <br>

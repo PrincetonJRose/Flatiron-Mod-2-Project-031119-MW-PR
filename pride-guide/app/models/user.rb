@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+
+    has_secure_password
+
+    belongs_to :state, optional: true
     has_many :user_genders
     has_many :genders, through: :user_genders
     has_many :user_orientations
