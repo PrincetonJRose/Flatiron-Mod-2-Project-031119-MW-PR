@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_133006) do
+ActiveRecord::Schema.define(version: 2019_04_15_171222) do
 
   create_table "genders", force: :cascade do |t|
     t.string "name"
@@ -18,10 +18,26 @@ ActiveRecord::Schema.define(version: 2019_04_15_133006) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.integer "review_id"
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["review_id"], name: "index_likes_on_review_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "orientations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "content"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "pronouns", force: :cascade do |t|
@@ -68,6 +84,15 @@ ActiveRecord::Schema.define(version: 2019_04_15_133006) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "resource_id"
+    t.integer "rating"
+    t.text "content"
+    t.index ["resource_id"], name: "index_reviews_on_resource_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|

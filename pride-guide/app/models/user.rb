@@ -9,7 +9,9 @@ class User < ApplicationRecord
     has_many :orientations, through: :user_orientations
     has_many :user_pronouns
     has_many :pronouns, through: :user_pronouns
-    accepts_nested_attributes_for :genders
+    has_many :posts
+    has_many :reviews
+    has_many :likes
     
     validates :username, length: { in: 6..16 }
     validates :username, presence: true

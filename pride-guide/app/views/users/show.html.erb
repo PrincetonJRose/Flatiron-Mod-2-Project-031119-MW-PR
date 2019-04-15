@@ -4,10 +4,9 @@
 <br>
 <p>
     <h1 align="left">
-        &emsp;&emsp;
         <%= gravatar_for @user %>
     </h1>
-        &emsp;&emsp;
+
         <% if @user.first_name.present? and @user.middle_initial.present? and @user.last_name.present? %>
             <%= " #{@user.first_name.capitalize} #{@user.middle_initial.capitalize}. #{@user.last_name.capitalize}" %>
         <% elsif @user.first_name.present? and @user.last_name.present? %>
@@ -19,4 +18,4 @@
         <% end %>
 </p>
 
-<p>&emsp;&emsp;<%= @user.email %></p>
+<p><%= @user.email %></p>
