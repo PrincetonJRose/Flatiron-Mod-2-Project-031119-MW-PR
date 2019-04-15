@@ -8,7 +8,15 @@
     <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    &emsp;&emsp;
+
+    <p align="right">
+      &emsp;&emsp; <%= link_to 'text', user_path %>
+      &emsp;&emsp;<%= link_to "Home", home_path %>
+      &emsp;&emsp;<%= link_to "About", about_path %>
+      &emsp;&emsp;<%= link_to "Help", help_path %>
+      &emsp;&emsp;<%= link_to "Contact", contact_path %>
+      &emsp;&emsp;
+    </p>
   </head>
 
   <body>
