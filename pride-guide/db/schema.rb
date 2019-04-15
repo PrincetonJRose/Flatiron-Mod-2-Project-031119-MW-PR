@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_14_204558) do
+ActiveRecord::Schema.define(version: 2019_04_15_133006) do
 
   create_table "genders", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,53 @@ ActiveRecord::Schema.define(version: 2019_04_14_204558) do
 
   create_table "pronouns", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resource_genders", force: :cascade do |t|
+    t.integer "gender_id"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gender_id"], name: "index_resource_genders_on_gender_id"
+    t.index ["resource_id"], name: "index_resource_genders_on_resource_id"
+  end
+
+  create_table "resource_orientations", force: :cascade do |t|
+    t.integer "orientation_id"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["orientation_id"], name: "index_resource_orientations_on_orientation_id"
+    t.index ["resource_id"], name: "index_resource_orientations_on_resource_id"
+  end
+
+  create_table "resource_services", force: :cascade do |t|
+    t.integer "resource_id"
+    t.integer "service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_id"], name: "index_resource_services_on_resource_id"
+    t.index ["service_id"], name: "index_resource_services_on_service_id"
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string "name"
+    t.string "number"
+    t.string "url"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
