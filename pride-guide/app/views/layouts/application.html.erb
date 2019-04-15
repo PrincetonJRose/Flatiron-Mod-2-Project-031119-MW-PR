@@ -10,15 +10,18 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <p align="right">
-     &emsp;&emsp;<% if current_user.present? %>
-                     <%= link_to "#{current_user.username}", user_path(current_user) %>
-                  <% else %>
-                    <%= link_to "Login", login_path %>
-                  <% end %>
-      &emsp;&emsp;<%= link_to "Home", home_path %>
-      &emsp;&emsp;<%= link_to "About", about_path %>
-      &emsp;&emsp;<%= link_to "Help", help_path %>
-      &emsp;&emsp;<%= link_to "Contact", contact_path %>
+      <% if current_user.present? %>
+        <%= link_to "#{current_user.username}", user_path(current_user) %>
+      <% else %>
+        <%= link_to "Login", login_path %>
+      <% end %>
+      <%= link_to "Home", home_path %>
+      <%= link_to "About", about_path %>
+      <%= link_to "Help", help_path %>
+      <%= link_to "Contact", contact_path %>
+      <% if current_user %>
+        <%= link_to "Logout", login_path, method: :delete %>
+        <% end %>
     </p>
      
   </head>
