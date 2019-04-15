@@ -1,4 +1,22 @@
 <br>
-<h1 align="center" style="color: green"><b><u><%= @user.username %></u></b></h1>
+<h1 align="center"><b><u><%= @user.username %></u></b></h1>
 <br>
 <br>
+<p>
+    <h1 align="left">
+        &emsp;&emsp;
+        <%= gravatar_for @user %>
+    </h1>
+        &emsp;&emsp;
+        <% if @user.first_name.present? and @user.middle_initial.present? and @user.last_name.present? %>
+            <%= " #{@user.first_name.capitalize} #{@user.middle_initial.capitalize}. #{@user.last_name.capitalize}" %>
+        <% elsif @user.first_name.present? and @user.last_name.present? %>
+            <%= " #{@user.first_name.capitalize} #{@user.last_name.capitalize}" %>
+        <% elsif @user.first_name.present? %>
+            <%= @user.first_name.capitalize %>
+        <% else %>
+            <%= @user.username %>
+        <% end %>
+</p>
+
+<p>&emsp;&emsp;<%= @user.email %></p>
