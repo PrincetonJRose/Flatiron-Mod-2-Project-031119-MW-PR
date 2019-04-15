@@ -1,7 +1,9 @@
 class StaticPagesController < ApplicationController
+
   def about
     render :about
   end
+  
   def home
     render :home
   end
@@ -13,4 +15,5 @@ class StaticPagesController < ApplicationController
   def contact
     render :contact
   end
+
 end
