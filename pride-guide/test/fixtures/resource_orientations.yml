@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  orientation: one
+  resource: one
+
+two:
+  orientation: two
+  resource: two
