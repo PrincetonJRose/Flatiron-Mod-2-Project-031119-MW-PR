@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
   resources :resources, only: [:index, :show, :create, :edit, :update, :destroy]
-=======
->>>>>>> pjrs
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
   
   get "/", to: "static_pages#home", as: "home"
