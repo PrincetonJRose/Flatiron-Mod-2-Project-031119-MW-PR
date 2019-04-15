@@ -11,6 +11,7 @@ class User < ApplicationRecord
     has_many :pronouns, through: :user_pronouns
     has_many :posts
     has_many :reviews
+    has_many :resources, through: :reviews
     has_many :likes
     
     validates :username, length: { in: 6..16 }

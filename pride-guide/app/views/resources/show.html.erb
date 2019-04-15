@@ -1,1 +1,34 @@
-<h1><%= @resource.name %></h1>
+<br>
+<h1 align="center"><b><u><%= @resource.name %></u></b></h1>
+<br>
+<br>
+<p><b>Phone #:  </b> <%= @resource.number %> </p>
+<p><b>Website:  </b> <%= @resource.url %> </p>
+<p><b>Address:  </b><%= @resource.address %></p>
+<p><b>City:  </b> <%= @resource.city %><b>  State:  </b> <%= @resource.state %></p>
+<p><b>Country:  </b> <%= @resource.country %></p>
+<br>
+<p><b>Description: </b> <%= @resource.description %></p>
+<br>
+<p><b>User Reviews:</b></p>
+<% if @resource.reviews.size == 0 %>
+    <p>No users have reviewed this location yet.</p>
+    <% if current_user %>
+        <%= form_for @review do |f| %>
+        <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
+        <p><%= f.label "You can be the first to review!" %></p>
+        <p><%= f.select :rating, 1..10 %> </p>
+        <p><%= f.text_area :content, size: "80x10" %></p>
+        <%= f.submit "Submit Review" %>
+        <% end %>
+    <% end %>
+<% end %>
+<% if @resource.reviews.size != 0 %>
+    <% @resource.reviews.each do |r| %>
+        <p><b>User: <%= r.user.username %></b></p>
+        <p>Rating: <%= r.rating %></p>
+        <p>Review: <%= r.content %></p>
+        <br>
+    <% end %>
+<% end %>
+
