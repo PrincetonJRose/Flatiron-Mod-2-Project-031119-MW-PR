@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :resources [:index, :show, :create, :edit, :update, :destroy]
-  
-  get 'static_pages/new'
-  get 'sessions/new'
+  resources :resources, only: [:index, :show, :create, :edit, :update, :destroy]
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
   
   get "/", to: "static_pages#home"
