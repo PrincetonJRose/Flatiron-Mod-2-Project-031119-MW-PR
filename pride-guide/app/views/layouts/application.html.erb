@@ -10,13 +10,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <p align="right">
-      &emsp;&emsp; <%= link_to 'text', user_path %>
+     &emsp;&emsp;<% if current_user.present? %>
+                     <%= link_to "#{current_user.username}", user_path(current_user) %>
+                  <% else %>
+                    <%= link_to "Login", login_path %>
+                  <% end %>
       &emsp;&emsp;<%= link_to "Home", home_path %>
       &emsp;&emsp;<%= link_to "About", about_path %>
       &emsp;&emsp;<%= link_to "Help", help_path %>
       &emsp;&emsp;<%= link_to "Contact", contact_path %>
-      &emsp;&emsp;
     </p>
+     
   </head>
 
   <body>
