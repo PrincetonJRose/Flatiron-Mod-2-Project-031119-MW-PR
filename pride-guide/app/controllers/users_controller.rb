@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :authorize!, except: [:index, :show]
+
     def index
         @users = User.all
     end
@@ -12,9 +14,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        # raise params.inspect
         @user = User.new(user_params)
-        # byebug
         if @user.save
             flash[:success] = "Welcome to Pride Guide!!!  ^_^"
             redirect_to user_path(@user)

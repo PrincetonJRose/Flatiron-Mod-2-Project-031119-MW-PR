@@ -8,7 +8,7 @@
     </h1>
 
         <% if @user.first_name.present? and @user.middle_initial.present? and @user.last_name.present? %>
-            <%= " #{@user.first_name.capitalize} #{@user.middle_initial.capitalize}. #{@user.last_name.capitalize}" %>
+            <%= " #{@user.first_name.capitalize} #{@user.middle_initial[0].capitalize}. #{@user.last_name.capitalize}" %>
         <% elsif @user.first_name.present? and @user.last_name.present? %>
             <%= " #{@user.first_name.capitalize} #{@user.last_name.capitalize}" %>
         <% elsif @user.first_name.present? %>
