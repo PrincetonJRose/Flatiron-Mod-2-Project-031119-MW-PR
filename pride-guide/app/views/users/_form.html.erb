@@ -1,70 +1,73 @@
 <% if @user.errors.any? %>
     <div id="error_explanation">
-    <h3 style="color: red">There were some errors with the information you entered into the form:</h2>
+    <h3 style="color: red">&emsp;There were some errors with the information you entered into the form:</h2>
     <ul>
         <% @user.errors.full_messages.each do |message| %>
-        <li><p style="color:red"><%= message %></p></li>
+        <li>
+            <p style="color:red">&emsp;<%= message %></p>
+        </li>
         <% end %>
     </ul>
     </div>
+    <br>
 <% end %>
 
 
 <%= form_for(@user) do |f| %>
-    <p><%= f.label "Enter your user name:" %></p>
-    <p>(must be between 6-16 characters long)</p>
-    <p><%= f.text_field :username %></p>
-    <p><%= f.label "Enter your email address:" %></p>
-    <p><%= f.text_field :email %></p>
-    <p><%= f.label "Enter your password:" %><br>
-    (must be between 6-16 characters long)</p>
-    <%= f.password_field :password %>
-    <p><%= f.label "Confirm your password:" %></p>
-    <%= f.password_field :password_confirmation %>
+    <p>&emsp;<%= f.label "Enter your user name:" %></p>
+    <p>&emsp;(must be between 6-16 characters long)</p>
+    <p>&emsp;<%= f.text_field :username %></p>
+    <p>&emsp;<%= f.label "Enter your email address:" %></p>
+    <p>&emsp;<%= f.text_field :email %></p>
+    <p>&emsp;<%= f.label "Enter your password:" %><br>
+    &emsp;(must be between 6-16 characters long)</p>
+    <p>&emsp;<%= f.password_field :password %></p>
+    <p>&emsp;<%= f.label "Confirm your password:" %></p>
+    <p>&emsp;<%= f.password_field :password_confirmation %></p>
     <br>
+    <p>&emsp;(The following fields are optional)</p>
     <br>
-    <p>(The following fields are optional)</p>
-    <p><%= f.label "Enter your first name:" %></p>
-    <p><%= f.text_field :first_name %></p>
-    <p><%= f.label "Enter your middle initial:" %></p>
-    <p><%= f.text_field :middle_initial %></p>
-    <p><%= f.label "Enter your last name:" %></p>
-    <p><%= f.text_field :last_name %></p>
-    <p><%= f.label "Enter your birthday:" %></p>
-    <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %></p>
-    <p><%= f.label "Enter in your City and State (optional):" %></p>
-    <p><%= f.text_field :city, placeholder: 'City'%></p>
-    <p><%= f.collection_select(:state_id, State.all, :id, :state_code, prompt: true) %></p>
+    <p>&emsp;<%= f.label "Enter your first name:" %></p>
+    <p>&emsp;<%= f.text_field :first_name %></p>
+    <p>&emsp;<%= f.label "Enter your middle initial:" %></p>
+    <p>&emsp;<%= f.text_field :middle_initial %></p>
+    <p>&emsp;<%= f.label "Enter your last name:" %></p>
+    <p>&emsp;<%= f.text_field :last_name %></p>
+    <p>&emsp;<%= f.label "Enter your birthday:" %></p>
+    <p>&emsp;<%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %></p>
+    <p>&emsp;<%= f.label "Enter in your City and State (optional):" %></p>
+    <p>&emsp;    <%= f.collection_select(:state_id, State.all, :id, :state_code, prompt: "Select State:") %>
+    <%= f.text_field :city, placeholder: 'City'%></p>
     <br>
-    <p><%= f.label "What gender(s) do you indentifty with? (Check all that apply)" %></p>
+    <p>&emsp;<%= f.label "What gender(s) do you indentifty with? (Check all that apply)" %></p>
     <p>
         <%= f.collection_check_boxes(:gender_ids, Gender.all, :id, :name) do |g| %>
-            <%= g.check_box %>
-            <%= g.label %>
+            &emsp;&emsp;<%= g.check_box %>
+            &emsp;<%= g.label %>
             <br>
         <% end %>
     </p>
     <br>
-    <p><%= f.label "What pronouns(s) do you use? (Check all that apply)" %></p>
+    <p>&emsp;<%= f.label "What pronouns(s) do you use? (Check all that apply)" %></p>
     <p>
         <%= f.collection_check_boxes(:pronoun_ids, Pronoun.all, :id, :name) do |g| %>
-            <%= g.check_box %>
-            <%= g.label %>
+            &emsp;&emsp;<%= g.check_box %>
+            &emsp;<%= g.label %>
             <br>
         <% end %>
     </p>
     <br>
-    <p><%= f.label "What sexual orientatio(s) do you consider yourself? (Check all that apply)" %></p>
+    <p>&emsp;<%= f.label "What sexual orientatio(s) do you consider yourself? (Check all that apply)" %></p>
     <p>
         <%= f.collection_check_boxes(:orientation_ids, Orientation.all, :id, :name) do |g| %>
-            <%= g.check_box %>
-            <%= g.label %>
+            &emsp;&emsp;<%= g.check_box %>
+            &emsp;<%= g.label %>
             <br>
         <% end %>
     </p>
     <br>
-    <p><%= f.label "Enter some quick information about yourself (optional):" %></p>
-    <p><%= f.text_area :bio, size: "80x10" %></p>
+    <p>&emsp;<%= f.label "Enter some quick information about yourself:" %></p>
+    <p>&emsp;<%= f.text_area :bio, size: "80x10" %></p>
     <br>
-    <%= f.submit %>
+    &emsp;&emsp;<%= f.submit "Create Account" %>
 <% end %>

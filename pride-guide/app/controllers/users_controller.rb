@@ -16,6 +16,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         # byebug
         if @user.save
+            flash[:success] = "Welcome to Pride Guide!!!  ^_^"
             redirect_to user_path(@user)
         else
             render :new
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :birthdate, :bio, :state_id, :city, :email, :password, :password_confirmation, :password_digest, pronoun_ids: [], gender_ids: [], orientation_ids: [])
+        params.require(:user).permit(:username, :birthdate, :bio, :state_id, :city, :first_name, :middle_initial, :last_name, :email, :password, :password_confirmation, :password_digest, pronoun_ids: [], gender_ids: [], orientation_ids: [])
     end
 
 end
