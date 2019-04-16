@@ -10,10 +10,11 @@
 <br>
 <p><b>Description: </b> <%= @resource.description %></p>
 <br>
-<% if @users_review %>
+<% if current_user and @users_review %>
     <p>Your rating: <%= @users_review.rating %> </p>
     <p>Your review: <%= @users_review.content %> </p>
     <br>
+
 <% else %>
     <%= form_for @review do |f| %>
         <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
