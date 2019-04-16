@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       @user.online = true
       @user.save!(validate: false)
-      session[:user_id] = @user.id
+      session[:user_id] = { value: @user.id, expires: 30.minutes }
       redirect_to home_path
     else
       @errors = "Invalid email and/or password."
