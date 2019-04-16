@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resources :resources, only: [:index, :show, :create, :edit, :update, :destroy]
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
+  resources :posts, only: [:create]
+  resources :comments, only: [:create]
   
   get "/", to: "static_pages#home", as: "home"
   get "/about", to: "static_pages#about", as: "about"
