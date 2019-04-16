@@ -10,7 +10,25 @@
 <br>
 <p><b>Description: </b> <%= @resource.description %></p>
 <br>
-<p><b>User Reviews:</b></p>
+<% if @users_review %>
+    <p>Your rating: <%= @users_review.rating %> </p>
+    <p>Your review: <%= @users_review.content %> </p>
+    <br>
+<% else %>
+    <%= form_for @review do |f| %>
+        <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
+        <p><%= f.label "Write your own review:" %></p>
+        <p><%= f.select :rating, 1..10 %> </p>
+        <p><%= f.text_area :content, size: "40x5" %></p>
+        <%= f.submit "Submit Review" %>
+    <% end %>
+<% end %>
+
+<% if current_user %>
+    <p><b>Other User Reviews:</b></p>
+<% else %>
+    <p><b>User Reviews:</b></p>
+<% end %>
 <% if @resource.reviews.size == 0 %>
     <p>No users have reviewed this location yet.</p>
     <% if current_user %>
@@ -25,6 +43,9 @@
 <% end %>
 <% if @resource.reviews.size != 0 %>
     <% @resource.reviews.each do |r| %>
+        <% if r.user == current_user %>
+            <% next %>
+        <% end %>
         <p><b>User: <%= r.user.username %></b></p>
         <p>Rating: <%= r.rating %></p>
         <p>Review: <%= r.content %></p>

@@ -17,6 +17,11 @@ class ResourcesController < ApplicationController
 
     def show
         @resource = Resource.find(params[:id])
+        @resource.reviews.each do |review|
+            if review.user == current_user
+                @users_review = review
+            end
+        end
         @review = Review.new
     end
 
