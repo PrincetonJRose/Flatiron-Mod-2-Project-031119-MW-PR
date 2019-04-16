@@ -2,7 +2,18 @@ class UsersController < ApplicationController
     before_action :authorize!, except: [:index, :show, :new]
 
     def index
-        @users = User.all
+        if params[:query]
+            @users = User.where("username LIKE ?", "%#{params[:query]}%")
+            if !params[:query].empty?
+                flash[:message] = "Search results for '#{params[:query]}'."
+            end
+            if @users.size == 0
+                flash[:message] = "We didn't find any search results that matched what you typed in."
+                @users = User.all
+            end
+        else
+            @users = User.all
+        end
     end
 
     def show
