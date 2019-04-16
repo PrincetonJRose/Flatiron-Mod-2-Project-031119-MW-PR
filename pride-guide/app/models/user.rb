@@ -23,7 +23,7 @@ class User < ApplicationRecord
                                 dependent: :destroy
     has_many :friends, through: :active_friends, source: :friend
     has_many :frienders, through: :passive_friends, source: :friender
-    
+
     validates :username, length: { in: 6..16 }
     validates :username, presence: true
     validates :username, uniqueness: true

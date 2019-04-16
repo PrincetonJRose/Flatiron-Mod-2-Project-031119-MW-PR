@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="columns">    
     <div class="column is-one-quarter">   
         <div class="card">
@@ -43,6 +44,26 @@
 </div>
 
 
+=======
+<br>
+<h1 align="center"><b><u><%= @user.username %></u></b></h1>
+<br>
+<br>
+<p>
+    <h1 align="left">
+        <%= gravatar_for @user %>
+    </h1>
+        <% if @user.first_name.present? and @user.middle_initial.present? and @user.last_name.present? %>
+            <%= " #{@user.first_name.capitalize} #{@user.middle_initial[0].capitalize}. #{@user.last_name.capitalize}" %>
+        <% elsif @user.first_name.present? and @user.last_name.present? %>
+            <%= " #{@user.first_name.capitalize} #{@user.last_name.capitalize}" %>
+        <% elsif @user.first_name.present? %>
+            <%= @user.first_name.capitalize %>
+        <% else %>
+            <%= @user.username %>
+        <% end %>
+</p>
+>>>>>>> 1fbf0a6c09d57b9c8b80fb5e2a7df164d870f80e
 
 
 
@@ -65,7 +86,6 @@
     </ul>
         <% end %>
 </p>
-
 <% if current_user.id == @user.id %>
     <%= render template: 'posts/new' %>
 <% end %>

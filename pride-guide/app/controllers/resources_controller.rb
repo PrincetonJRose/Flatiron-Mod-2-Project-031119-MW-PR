@@ -22,6 +22,7 @@ class ResourcesController < ApplicationController
                 @users_review = review
             end
         end
+        @map_location = @resource.name.split.join("+")
         @review = Review.new
     end
 
