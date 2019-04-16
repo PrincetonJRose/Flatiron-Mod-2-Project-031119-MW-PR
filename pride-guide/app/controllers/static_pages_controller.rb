@@ -3,6 +3,10 @@ class StaticPagesController < ApplicationController
   def about
     render :about
   end
+
+  def login
+    render :login
+  end
   
   def home
     render :home
