@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<div class="container">
+  
   <head>
     <title>PrideGuide</title>
     <%= csrf_meta_tags %>
@@ -9,21 +11,43 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <p align="right">
-      <% if current_user.present? %>
+  <section class='hero'>
+    <div class="hero-body">
+
+      <h1 class='title level_item has-text-centered'>Pride Guide</h1>
+      <h2 class='subtitle level_item has-text-centered'>Building a better LGBTQIA+ community together.</h2>
+    </div>
+  </section>
+
+  <nav class='level'>  
+    <% if current_user.present? %>
+      <p class="level-item has-text-centered">
         <%= link_to "#{current_user.username}", user_path(current_user) %>
-      <% else %>
-        <%= link_to "Login", login_path %>
-      <% end %>
-      <%= link_to "Resources", resources_path %>
-      <%= link_to "Home", home_path %>
-      <%= link_to "About", about_path %>
-      <%= link_to "Help", help_path %>
-      <%= link_to "Contact", contact_path %>
-      <% if current_user %>
+      </p>
+    <% else %>
+      <p class="level-item has-text-centered">
+        <%= link_to "Login", login_path %> 
+    <% end %>
+      </p>
+      <p class="level-item has-text-centered">
+      <%= link_to "Home", home_path %> 
+      </p>
+      <p class="level-item has-text-centered">
+      <%= link_to "About", about_path %> 
+      </p>
+      <p class="level-item has-text-centered">
+      <%= link_to "Help", help_path %> 
+      </p>
+      <p class="level-item has-text-centered">
+      <%= link_to "Contact", contact_path %> 
+      </p>
+    <% if current_user %>
+      <p class="level-item has-text-centered">
         <%= link_to "Logout", login_path, method: :delete %>
-        <% end %>
-    </p>
+      </p>
+      <% end %>
+  </nav>
+
      
   </head>
 
@@ -38,3 +62,5 @@
     <%= yield %>
   </body>
 </html>
+
+</div>

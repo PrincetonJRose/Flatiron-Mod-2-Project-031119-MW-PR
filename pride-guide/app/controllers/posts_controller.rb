@@ -1,16 +1,13 @@
-class PostController < ApplicationController
+class PostsController < ApplicationController
+
     def create
         @post = Post.new(post_params)
         @post.user = current_user
-        if @post.save
-            redirect_to user_path(current_user)
-        else
-            @errors = "Post did not submit.  =("
-        end
+        @post.save
         redirect_to user_path(current_user)
     end
 
-    private
+    private 
 
     def post_params
         params.require(:post).permit(:title, :content)

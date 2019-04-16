@@ -20,5 +20,27 @@
 
 <p><%= @user.email %></p>
 
+
 <p>
+    <ul>
+        <% @posts.each do |post| %>
+            <%= post.title %>
+            <%= post.content %>
+            <% post.comments.each do |c| %>
+                <ul>
+                    <strong><%= c.user.username %></strong>
+                    <%= c.content %>
+                </ul>
+                <% end %>
+            <%= form_for @comment do |f| %>
+                <%= f.hidden_field :post_id, value: "#{post.id}" %>
+                <%= f.text_field :content %>
+                <%= f.submit "Comment" %>
+            <% end %>
+    </ul>
+        <% end %>
 </p>
+
+<% if current_user.id == @user.id %>
+    <%= render template: 'posts/new' %>
+<% end %>

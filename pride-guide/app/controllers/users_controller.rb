@@ -7,6 +7,9 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
+        @posts = @user.posts
+        @post = Post.new
+        @comment = current_user.comments.build
     end
 
     def new
@@ -39,7 +42,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :birthdate, :bio, :state_id, :city, :first_name, :middle_initial, :last_name, :email, :password, :password_confirmation, :password_digest, pronoun_ids: [], gender_ids: [], orientation_ids: [])
+        params.require(:user).permit(:username, :birthdate, :bio, :state_id, :city, :first_name, :middle_initial, :last_name, :email, :password, :password_confirmation, :password_digest, pronoun_ids: [], gender_ids: [], orientation_ids: [], post:[:title, :content])
     end
 
 end

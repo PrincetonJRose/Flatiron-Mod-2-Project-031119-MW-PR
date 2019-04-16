@@ -1,5 +1,5 @@
 class Like < ActiveRecord::Base 
     belongs_to :user
-    belongs_to :post, optional: true
-    belongs_to :review, optional: true
+    belongs_to :post
+    belongs_to :review
 end
