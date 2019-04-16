@@ -38,13 +38,13 @@
     <% if current_user %>
       <p class="level-item">
         <%= link_to "Logout", login_path, method: :delete %>
-        <a href="users/<%=current_user.id%>">
-        <figure class="media-left">
-          <p class="image is-64x64">
+        <%= link_to user_path(current_user) do %>
+          <figure class="media-left">
+            <p class="image is-64x64">
             <%= gravatar_for current_user %>
           </p>
         </figure>
-        </a>
+        <% end %>
       </p>
       <% end %>
   </nav>

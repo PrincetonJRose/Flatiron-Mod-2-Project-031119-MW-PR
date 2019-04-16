@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authorize!, except: [:index, :show, :new]
+    before_action :authorize!, except: [:index, :show, :new, :create]
 
     def index
         @users = User.all
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             flash[:success] = "Welcome to Pride Guide!!!  ^_^"
-            redirect_to user_path(@user)
+            redirect_to login_path
         else
             render :new
         end

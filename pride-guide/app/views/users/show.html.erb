@@ -12,12 +12,38 @@
             <div class="card-content is-vertical-center" style="width: 248px; margin: auto; padding-top:1em;">
                 <p class="has-text-centered"><%= @user.bio %></p>
             </div>
+            <% if @user != current_user %>
+                <%= form_tag "/add/#{@user.id}", method: :post %>
+                    <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
+                <% end %>                
+            </div>
+            <div class="content"">
+                <strong>Total Friends:<%= @user.friends.size %></strong>
+            </div>
+            <div class="tile">
+                <ul>
+                    <% @user.friends.each do |friend|%>
+                        <li>
+                            <%= link_to user_path(friend) do %>
+                                <figure class="media-left">
+                                    <p class="image is-64x64">
+                                    <%= gravatar_for friend %>
+                                    </p>
+                                    <p>
+                                        <%= friend.username %>
+                                    </p>
+                                </figure>
+                            <% end %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
 
-<p><%= @user.email %></p>
+
 
 
 <p>

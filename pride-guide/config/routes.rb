@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "/home", to: "static_pages#home", as: "home"
 
   get "/register", to: "users#new", as: "register"
+  post "/add/:id", to: "friends#add", as: "add_friend"
 
 
 

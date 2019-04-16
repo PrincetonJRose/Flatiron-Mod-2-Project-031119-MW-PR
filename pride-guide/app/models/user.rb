@@ -15,10 +15,12 @@ class User < ApplicationRecord
     has_many :likes
     has_many :comments
 
-    has_many :active_friends, class_name:  "Friend", foreign_key: "friender_id", dependent: :destroy
-    has_many :passive_friends, class_name:  "Friend",
-    foreign_key: "friend_id",
-    dependent: :destroy
+    has_many :active_friends,   class_name:  "Friend", 
+                                foreign_key: "friender_id", 
+                                dependent: :destroy
+    has_many :passive_friends,  class_name:  "Friend",
+                                foreign_key: "friend_id",
+                                dependent: :destroy
     has_many :friends, through: :active_friends, source: :friend
     has_many :frienders, through: :passive_friends, source: :friender
     
@@ -30,4 +32,6 @@ class User < ApplicationRecord
     validates :password, presence: true
     validates :password, length: { in: 6..16 }
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+
 end
