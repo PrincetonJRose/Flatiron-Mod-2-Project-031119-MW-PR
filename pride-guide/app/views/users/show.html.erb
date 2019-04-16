@@ -1,44 +1,80 @@
-<br>
-<h1 align="center"><b><u><%= @user.username %></u></b></h1>
-<br>
-<br>
-<p>
-    <h1 align="left">
-        <%= gravatar_for @user %>
-    </h1>
-        <% if @user.first_name.present? and @user.middle_initial.present? and @user.last_name.present? %>
-            <%= " #{@user.first_name.capitalize} #{@user.middle_initial[0].capitalize}. #{@user.last_name.capitalize}" %>
-        <% elsif @user.first_name.present? and @user.last_name.present? %>
-            <%= " #{@user.first_name.capitalize} #{@user.last_name.capitalize}" %>
-        <% elsif @user.first_name.present? %>
-            <%= @user.first_name.capitalize %>
-        <% else %>
-            <%= @user.username %>
-        <% end %>
-</p>
-
-<p><%= @user.email %></p>
-
-
-<p>
-    <ul>
-        <% @posts.each do |post| %>
-            <%= post.title %>
-            <%= post.content %>
-            <% post.comments.each do |c| %>
+<div class="level">
+    <div class="columns is-variable is-6">    
+        <div class="column">   
+            <div class="card" style="margin-bottom:10%;">
+                <div class="card-content is-vertical-center" style="width: 248px; margin: auto; padding-bottom:0em;">
+                    <figure class="image is-200x200">
+                        <%= gravatar_for @user %>    
+                    </figure>
+                </div> 
+                <div class="card-content is-vertical-center" style="width: 248px; margin: auto; padding-top: .5em; padding-bottom:.5em;">
+                    <p class="title is-4 has-text-centered"><%=@user.username%></p>
+                </div>
+                <div class="card-content is-vertical-center" style="width: 248px; margin: auto; padding-top:1em;">
+                    <p class="has-text-centered"><%= @user.bio %></p>
+                </div>
+                <% if @user != current_user %>
+                    <%= form_tag "/add/#{@user.id}", method: :post %>
+                        <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
+                    <% end %>                
+                </div>
+                <div class="card">
+                    <div class="card-header has-text-centered">
+                        <p class="card-header-title is-3">Friends</p>
+                    </div>
                 <ul>
-                    <strong><%= c.user.username %></strong>
-                    <%= c.content %>
+                    <div class="column is-one-half">
+                        <% @user.friends.take(5).each do |friend|%>
+                        <div class="card-content is-flex is-horizontal-center">
+                            <li>
+                                <%= link_to user_path(friend) do %>
+                                    <figure class="media">
+                                        <p class="image is-64x64 center">
+                                        <%= gravatar_for friend %>
+                                        </p>
+                                        <p class="content" style="margin:1em;">
+                                        <%= friend.username %>
+                                        </p>
+                                    </figure>
+                                <% end %>
+                            </li>
+                        </div>
+                    </div>
+                    <% end %>
+                    </div>
                 </ul>
+                </div>
+            </div>
+
+        <div class="column">
+                <ul>
+                    <% @posts.each do |post| %>
+                    <div class="card">
+                        <div class="card-content is-vertical-center">
+                            <div class="card-header-title">
+                                <p class="title is-3">
+                                    <%= post.title %>
+                                </p>
+                            </div>
+                                <%= post.content %>
+                                <% post.comments.each do |c| %>
+                                    <ul>
+                                        <strong><%= c.user.username %></strong>
+                                        <%= c.content %>
+                                    </ul>
+                                    <% end %>
+                                <%= form_for @comment do |f| %>
+                                    <%= f.hidden_field :post_id, value: "#{post.id}" %>
+                                    <%= f.text_field :content %>
+                                    <%= f.submit "Comment" %>
+                                </div>        
+                            </div>
+                        <% end %>
+                    </ul>
+                    <% end %>
+                <% if current_user.id == @user.id %>
+                    <%= render template: 'posts/new' %>
                 <% end %>
-            <%= form_for @comment do |f| %>
-                <%= f.hidden_field :post_id, value: "#{post.id}" %>
-                <%= f.text_field :content %>
-                <%= f.submit "Comment" %>
-            <% end %>
-    </ul>
-        <% end %>
-</p>
-<% if current_user.id == @user.id %>
-    <%= render template: 'posts/new' %>
-<% end %>
+        </div>
+    </div>
+</div>

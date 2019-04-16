@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to home_path
     else
       @errors = "Invalid email and/or password."
-      render :new
+      render template:'static_pages/login'
     end
   end
 
