@@ -1,12 +1,14 @@
-<br>
+<% if @resource.image %>
+    <p align="center"><%= image_tag @resource.image %></p>
+<% end %>
 <h1 align="center"><b><u><%= @resource.name %></u></b></h1>
-<br>
 <br>
 <p><b>Phone #:  </b> <%= @resource.number %> </p>
 <p><b>Website:  </b> <%= @resource.url %> </p>
 <p><b>Address:  </b><%= @resource.address %></p>
 <p><b>City:  </b> <%= @resource.city %><b>  State:  </b> <%= @resource.state %></p>
 <p><b>Country:  </b> <%= @resource.country %></p>
+<p><a href="https://www.google.com/maps/search/?api=1&query=<%= @map_location %>">Google Maps</a></p>
 <br>
 <p><b>Description: </b> <%= @resource.description %></p>
 <br>
@@ -14,8 +16,7 @@
     <p>Your rating: <%= @users_review.rating %> </p>
     <p>Your review: <%= @users_review.content %> </p>
     <br>
-
-<% else %>
+<% elsif current_user %>
     <%= form_for @review do |f| %>
         <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
         <p><%= f.label "Write your own review:" %></p>
@@ -30,7 +31,7 @@
 <% else %>
     <p><b>User Reviews:</b></p>
 <% end %>
-<% if @resource.reviews.size == 0 %>
+<% if current_user and @resource.reviews.size == 0 %>
     <p>No users have reviewed this location yet.</p>
     <% if current_user %>
         <%= form_for @review do |f| %>

@@ -15,13 +15,15 @@ class User < ApplicationRecord
     has_many :likes
     has_many :comments
 
+    ## Associations for the friends class/table
     has_many :active_friends, class_name:  "Friend", foreign_key: "friender_id", dependent: :destroy
     has_many :passive_friends, class_name:  "Friend",
     foreign_key: "friend_id",
     dependent: :destroy
     has_many :friends, through: :active_friends, source: :friend
     has_many :frienders, through: :passive_friends, source: :friender
-    
+    ###########################################
+
     validates :username, length: { in: 6..16 }
     validates :username, presence: true
     validates :username, uniqueness: true
