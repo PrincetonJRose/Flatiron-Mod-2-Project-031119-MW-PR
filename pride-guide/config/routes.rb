@@ -6,16 +6,18 @@ Rails.application.routes.draw do
   resources :posts, only: [:create]
   resources :comments, only: [:create]
   
-  get "/", to: "static_pages#home", as: "home"
+  get "/", to: "static_pages#login", as: "login"
+    post "/", to: "sessions#create"
+    delete "/", to: "sessions#destroy", as: "logout"
+
   get "/about", to: "static_pages#about", as: "about"
   get "/contact", to: "static_pages#contact", as: "contact"
   get "/help", to: "static_pages#help", as: "help"
+  get "/home", to: "static_pages#home", as: "home"
 
   get "/register", to: "users#new", as: "register"
 
-  get "/login", to: "sessions#new", as: "login"
-  post "/login", to: "sessions#create"
-  delete "/login", to: "sessions#destroy", as: "logout"
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
