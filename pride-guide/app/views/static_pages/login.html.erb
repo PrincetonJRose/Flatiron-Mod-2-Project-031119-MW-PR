@@ -1,5 +1,24 @@
-
-
-<%= render template: 'sessions/new' %>
-
-<%= link_to 'Create an Account', '/register' %>
+<div class="columns is-centered">  
+  <div class="column is-half">
+    <% if @errors %>   
+        <p class="tile notification is-danger"><%= @errors %></p>
+    <% end %>
+    <div class="box box-padding">    
+    <%= form_tag(login_path) do %>
+      <div class="field has-text-left">
+        <label>Email</label><br>
+        <input class="input is primary" type="text" name="email" size="40" ><br>
+      </div>
+      <div class="field has-text-left">
+        <label>Password</label><br>
+        <input class="input is primary" type="password" name="password"><br>
+      </div>
+        <br>
+        <div class="control">
+          <button class="button is-primary">Login</button>
+          <a href="/register" class="button is-link" >Sign up</a>     
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
