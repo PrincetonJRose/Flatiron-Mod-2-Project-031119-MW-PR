@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :reviews, only: [:create, :edit]
+  resources :reviews, only: [:create, :edit, :destroy]
   resources :resources, only: [:index, :show, :create, :edit, :update, :destroy]
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
-  resources :posts, only: [:create]
+  resources :posts, only: [:create, :edit, :destroy]
   resources :comments, only: [:create]
   
   get "/", to: "static_pages#login", as: "login"
