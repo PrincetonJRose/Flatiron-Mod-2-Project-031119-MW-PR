@@ -31,15 +31,15 @@
 <% else %>
     <p><b>User Reviews:</b></p>
 <% end %>
-<% if current_user and @resource.reviews.size == 0 %>
+<% if @resource.reviews.size == 0 %>
     <p>No users have reviewed this location yet.</p>
     <% if current_user %>
         <%= form_for @review do |f| %>
-        <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
-        <p><%= f.label "You can be the first to review!" %></p>
-        <p><%= f.label "Rating:" %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
-        <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
-        <%= f.submit "Submit Review" %>
+            <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
+            <p><%= f.label "You can be the first to review!" %></p>
+            <p><%= f.label "Rating: " %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
+            <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
+            <%= f.submit "Submit Review" %>
         <% end %>
     <% end %>
 <% end %>
