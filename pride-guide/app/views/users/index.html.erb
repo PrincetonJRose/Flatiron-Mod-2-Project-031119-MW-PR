@@ -1,13 +1,11 @@
 <br>
 <h1 align="center">Current list of users:</h1>
 <br>
-<form action="/users" method="get">
-  <input type="text" name="query" placeholder="Search for users..." />
-  <input type="submit" value="Search!" />
-</form>
-<br>
 <ul>
     <% @users.each do |user| %>
+        <% if user == current_user %>
+            <% next %>
+        <% end %>
         <li>
             <p><%= link_to user.username, user_path(user) %></p>
             <% if user.online == true %>

@@ -26,6 +26,12 @@
         <%= link_to "Login", login_path %> 
     <% end %>
       </p>
+      <p>
+        <form action="/search" method="get">
+          <input type="text" name="query" placeholder="Search the site..." />
+          <input type="submit" value="Search!" />
+        </form>
+      </p>
       <p class="level-item has-text-centered">
       <%= link_to "Home", home_path %> 
       </p>
