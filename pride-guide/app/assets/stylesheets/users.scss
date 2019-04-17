@@ -1,3 +1,75 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// // Place all the styles related to the users controller here.
+// // They will automatically be included in application.css.
+// // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    grid-auto-flow: row;
+}
+
+.one {
+    grid-column: 1 ;
+    grid-row: auto;
+}
+
+.two {
+    grid-column: 2;
+    grid-row: auto;
+}
+
+.post-card-header {
+    background-color: rgba(128,	0,	128, 0.5);
+    align-items: stretch;
+    box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
+    display: flex;
+    border-radius: 0px 10px 0px 0px; 
+}
+
+  .post-card {
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+    color: #4a4a4a;
+    max-width: 100%;
+    position: relative;
+    border-radius: 10px 20px 20px 20px; 
+    -moz-border-radius: 10px 20px 20px 20px; 
+    -webkit-border-radius: 10px 20px 20px 20px; 
+    border: 5px solid #796680;
+  }
+
+
+html, body {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+.content {
+    position:relative;
+    height: 100%;
+    width:600px; /* Sizing - any length */
+    padding:60px 0 30px 0; /* Header height and footer height */
+    margin:0 auto 0 auto; /* Center content */
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+.scrollable {
+    height: 100%;
+    min-width: 300px;
+    margin-left: 100px;
+    margin-right: 100px;
+    overflow:auto;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+

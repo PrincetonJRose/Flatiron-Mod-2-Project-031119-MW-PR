@@ -1,53 +1,66 @@
 <!DOCTYPE html>
 <html>
-<div class="container">
-  
-  <head>
-    <title>PrideGuide</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <div class="container">
+    
+    <head>
+      <title>PrideGuide</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+      <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <section class='hero'>
-    <div class="hero-body">
 
-      <h1 class='title level_item has-text-centered'>Pride Guide</h1>
-      <h2 class='subtitle level_item has-text-centered'>Building a better LGBTQIA+ community together.</h2>
-    </div>
-  </section>
-
-  <nav class='level'>  
-    <% if current_user.present? %>
-    <% else %>
-      <p class="level-item has-text-centered">
-        <%= link_to "Login", login_path %> 
-    <% end %>
-      </p>
-      <p class="level-item has-text-centered">
-      <%= link_to "Home", home_path %> 
-      </p>
-      <p class="level-item has-text-centered">
-      <%= link_to "About", about_path %> 
-      </p>
-      <p class="level-item has-text-centered">
-      <%= link_to "Help", help_path %> 
-      </p>
-    <% if current_user %>
-      <p class="level-item">
-        <%= link_to "Logout", login_path, method: :delete %>
-        <%= link_to user_path(current_user) do %>
-          <figure class="media-left">
-            <p class="image is-64x64">
-            <%= gravatar_for current_user %>
-          </p>
-        </figure>
-        <% end %>
-      </p>
+    <div class="navbar-grid">
+    <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">  
+      <div class="navbar-brand">
+          <a class="navbar-item max-height:3em" href="/home" >
+            <%= image_tag  "nav_bar_logo_2x.png" %>
+          </a>
+      </div>
+      <% if current_user.present? %>
+      <% else %>
+        <p class="navbar-item has-text-centered">
+          <%= link_to "Login", login_path %> 
       <% end %>
-  </nav>
+        </p>
+    <div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Menu
+          </a>
+        <div class="navbar-dropdown is-boxed is-right">
+          <div class="navbar-item has-text-centered">
+            <%= link_to "Home", home_path %> 
+          </div>
+          <div class="navbar-item has-text-centered">
+            <%= link_to "About", about_path %> 
+          </div>
+          <div class="navbar-item has-text-centered">
+            <%= link_to "Help", help_path %> 
+          </div>
+        <% if current_user %>
+        <hr class="navbar-divider">
+          <div class="navbar-item">
+            <%= link_to "Logout", login_path, method: :delete %>
+          <% end %>
+          </div>
+      </div>
+    </div>
+      <div class="navbar-item">
+        <% if current_user %>
+            <%= link_to user_path(current_user) do %>
+                <%= gravatar_for current_user %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+          
 
      
   </head>
