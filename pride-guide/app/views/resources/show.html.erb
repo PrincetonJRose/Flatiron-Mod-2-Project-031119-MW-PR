@@ -16,7 +16,7 @@
     <p>Your rating: <%= @users_review.rating %> </p>
     <p>Your review: <%= @users_review.content %> </p>
     <br>
-<% elsif current_user %>
+<% elsif current_user and @resource.reviews.size != 0 %>
     <%= form_for @review do |f| %>
         <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
         <p><%= f.label "Write your own review:" %></p>
@@ -37,8 +37,8 @@
         <%= form_for @review do |f| %>
         <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
         <p><%= f.label "You can be the first to review!" %></p>
-        <p><%= f.select :rating, 1..10 %> </p>
-        <p><%= f.text_area :content, size: "80x10" %></p>
+        <p><%= f.label "Rating:" %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
+        <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
         <%= f.submit "Submit Review" %>
         <% end %>
     <% end %>
