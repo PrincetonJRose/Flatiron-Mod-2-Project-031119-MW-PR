@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "/register", to: "users#new", as: "register"
   post "/add/:id", to: "friends#add", as: "add_friend"
 
+  get "/search", to: "application#search", as: "search"
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
