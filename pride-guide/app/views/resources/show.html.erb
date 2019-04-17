@@ -6,7 +6,8 @@
 <p><b>Phone #:  </b> <%= @resource.number %> </p>
 <p><b>Website:  </b> <a href="<%= @resource.url %>"> <%= @resource.url %> </a> </p>
 <p><b>Address:  </b><%= @resource.address %></p>
-<p><b>City:  </b> <%= @resource.city %><b>  State:  </b> <%= @resource.state %></p>
+<p><b>City:  </b> <%= @resource.city %></p>
+<p><b>State:  </b> <%= @resource.state %></p>
 <p><b>Country:  </b> <%= @resource.country %></p>
 <p><a href="https://www.google.com/maps/search/?api=1&query=<%= @map_location %>">Google Maps</a></p>
 <br>
@@ -37,9 +38,12 @@
         <%= form_for @review do |f| %>
             <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
             <p><%= f.label "You can be the first to review!" %></p>
+            <br>
             <p><%= f.label "Rating: " %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
+            <br>
             <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
             <%= f.submit "Submit Review" %>
+            <br>
         <% end %>
     <% end %>
 <% end %>
