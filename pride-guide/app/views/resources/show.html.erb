@@ -4,7 +4,7 @@
 <h1 align="center"><b><u><%= @resource.name %></u></b></h1>
 <br>
 <p><b>Phone #:  </b> <%= @resource.number %> </p>
-<p><b>Website:  </b> <%= @resource.url %> </p>
+<p><b>Website:  </b> <a href="<%= @resource.url %>"> <%= @resource.url %> </a> </p>
 <p><b>Address:  </b><%= @resource.address %></p>
 <p><b>City:  </b> <%= @resource.city %><b>  State:  </b> <%= @resource.state %></p>
 <p><b>Country:  </b> <%= @resource.country %></p>
@@ -20,12 +20,12 @@
     <%= form_for @review do |f| %>
         <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
         <p><%= f.label "Write your own review:" %></p>
-        <p><%= f.select :rating, 1..10 %> </p>
+        <p><%= f.select :rating, 1..5 %> </p>
         <p><%= f.text_area :content, size: "40x5" %></p>
         <%= f.submit "Submit Review" %>
     <% end %>
 <% end %>
-
+<% numbers = [1,2,3,4,5] %>
 <% if current_user %>
     <p><b>Other User Reviews:</b></p>
 <% else %>
