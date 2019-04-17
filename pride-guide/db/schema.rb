@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_200546) do
+ActiveRecord::Schema.define(version: 2019_04_17_184048) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,45 @@ ActiveRecord::Schema.define(version: 2019_04_16_200546) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "custom_genders", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "custom_orientations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "custom_pronouns", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "custom_user_genders", force: :cascade do |t|
+    t.integer "custom_gender_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "custom_user_orientations", force: :cascade do |t|
+    t.integer "custom_orientation_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "custom_user_pronouns", force: :cascade do |t|
+    t.integer "custom_pronoun_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friends", force: :cascade do |t|

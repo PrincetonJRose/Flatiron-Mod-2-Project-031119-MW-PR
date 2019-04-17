@@ -14,6 +14,12 @@ class User < ApplicationRecord
     has_many :resources, through: :reviews
     has_many :likes
     has_many :comments
+    has_many :custom_user_genders
+    has_many :custom_genders, through: :custom_user_genders
+    has_many :custom_user_pronouns
+    has_many :custom_pronouns, through: :custom_user_pronouns
+    has_many :custom_user_orientations
+    has_many :custom_orientations, through: :custom_user_orientations
 
     has_many :active_friends,   class_name:  "Friend", 
                                 foreign_key: "friender_id", 

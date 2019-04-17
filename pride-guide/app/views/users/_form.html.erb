@@ -47,6 +47,12 @@
             <br>
         <% end %>
     </p>
+    <p>
+        Not seeing something you identify with here? Enter in a new one!(up to 3)
+        <% 3.times do %>
+        <%= f.text_field :custom_genders[], placeholder: "Enter here..."
+        <% end %>
+    </p>
     <br>
     <p><%= f.label "What pronouns(s) do you use? (Check all that apply)" %></p>
     <p>

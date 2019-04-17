@@ -12,11 +12,7 @@ class ApplicationController < ActionController::Base
             if @users.size == 0 and @resources.size == 0 and @posts.size == 0
                 flash[:message] = "We didn't find any search results that matched '#{params[:query]}'."
             end
-            # binding.pry
         else
-            # @users = User.all
-            # @resources = Resource.all
-            # @posts = Post.all
             redirect_to home_path
         end
     end
