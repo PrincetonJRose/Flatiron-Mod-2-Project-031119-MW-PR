@@ -11,6 +11,9 @@
                 <div class="card-content is-vertical-center" style="padding-top:1em;">
                     <p class="has-text-centered"><%= @user.bio %></p>
                 </div>
+                <div class="content" style="margin-left:1em;">
+                    <p>City: <%= @user.city %></p>    
+                </div>
                 <% if @user != current_user && current_user && !@user.friends.include?(current_user) && !@user.frienders.include?(current_user)%>
                     <%= form_tag "/add/#{@user.id}", method: :post %>
                         <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
@@ -52,7 +55,9 @@
                             <h1 class="title is-3" style="margin: 0.5em 0.5em 0.5em 1em">
                                 <%= post.title %>
                             </h1>
-                            <p><% p = post.created_at %><%= p.strftime(" at %l:%M %P on %m/%d/%Y ") %></p>
+                            <p class="subtitile is-7">
+                            <% p = post.created_at %><%= p.strftime(" at %l:%M %P on %m/%d/%Y ") %>
+                            </p>
                         </div>
                         <hr>
                         <div class="content" style="padding:auto;margin:auto;padding-left: 20px;padding-right: 20px;padding-top: 0px;">
@@ -80,21 +85,26 @@
                                     </div>
                                 </div>
                             <% end %>
-                        <% if current_user %>
-                            <%= form_for @comment do |f| %>
-                                <%= f.hidden_field :post_id, value: "#{post.id}" %>
-                                <%= f.text_field :content %>
-                                <%= f.submit "Comment" %> 
+                        <footer class="card-footer">                        
+                            <% if current_user %>
+                                <%= form_for @comment do |f| %>
+                                    <%= f.hidden_field :post_id, value: "#{post.id}" %>
+                                    <div class="level">
+                                    <%= f.text_field :content, placeholder: "Leave a comment...", class:"input is-rounded is-small", style:"margin:1em;" %>
+                                    <%= f.submit "Comment", class:"button is-small is-success", style:"margin:1em;" %> 
+                                    </div>
+                                <% end %>
                             <% end %>
+                            <% if current_user == @user %>
+                                    <%= form_for post, controller: 'posts', method: :delete do |f| %>
+                                        <%= f.submit "Delete", class:"button is-small is-danger", style:"margin:1em;position:relative;left:15em;" %>
+                                    <% end %>
+                                    <%= button_to "Edit", edit_post_path(post), method: :get, class:"button is-small is-warning", style:"margin:1em;position:relative;left:15em;" %>
+                                </footer>
+                            <% end %>
+                            </div>
                         <% end %>
-                        <% if current_user == @user %>
-                            <footer class="card-footer">                        
-                                <a class="button is-warning" style="margin:.5em;position:relative;left:27em;" href="posts/<%=post.id%>/edit" class="card-footer-item">Edit</a>
-                                <a class="button is-danger" style="margin:.5em;position:relative;left:27em;" href="posts/delete" class="card-footer-item">Delete</a>
-                            </footer>
-                        <% end %>
-                        </div>
-                    <% end %>
+                    </div>
 
             <% if current_user == @user %>
                 <%= render template: 'posts/new' %>
