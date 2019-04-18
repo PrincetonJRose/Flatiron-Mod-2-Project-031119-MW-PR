@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/contact", to: "static_pages#contact", as: "contact"
   get "/help", to: "static_pages#help", as: "help"
   get "/home", to: "static_pages#home", as: "home"
+  get "/glossary", to:"static_pages#glossary", as: "glossary"
 
   get "/register", to: "users#new", as: "register"
   post "/add/:id", to: "friends#add", as: "add_friend"
