@@ -11,7 +11,7 @@
                 <div class="card-content is-vertical-center" style="padding-top:1em;">
                     <p class="has-text-centered"><%= @user.bio %></p>
                 </div>
-                <% if @user != current_user %>
+                <% if @user != current_user && current_user && !@user.friends.include?(current_user) && !@user.frienders.include?(current_user)%>
                     <%= form_tag "/add/#{@user.id}", method: :post %>
                         <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
                     <% end %>                
@@ -52,34 +52,51 @@
                             <h1 class="title is-3" style="margin: 0.5em 0.5em 0.5em 1em">
                                 <%= post.title %>
                             </h1>
+                            <p><% p = post.created_at %><%= p.strftime(" at %l:%M %P on %m/%d/%Y ") %></p>
                         </div>
-                        <hr class="divider">
+                        <hr>
                         <div class="content" style="padding:auto;margin:auto;padding-left: 20px;padding-right: 20px;padding-top: 0px;">
                             <%= post.content %>
                         </div>
                         <hr>
                             <% post.comments.each do |c| %>
                                 <div class="card">
-                                    <div class="" style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;padding-right: 10px;">
-                                        <%= c.user.username %><br>
+                                    <div class="card-content">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div style="margin-right:0px;padding-left: 10px;padding-top: 10px;padding-bottom: 10px;padding-right: 10px;">
+                                                    <figure class="image is-48x48">
+                                                        <%= gravatar_for c.user %>
+                                                    </figure>
+                                                    <div class="media-content">
+                                                        <h1 class="title is-5"><%= c.user.username %></h1>
+                                                        <p class="subtitle is-7" style="margin-bottom:0;"><% t = c.created_at %><%= t.strftime(" at %l:%M %P on %m/%d/%Y ") %></p>
+                                                    </div>
+                                                </div>
+                                                    <hr style="margin:0;">
+                                            <p class="card-content"><%= c.content %></p>
+                                        </div>
+                                            </div>
                                     </div>
-                                        <%= c.content %>
-                                    </p>
                                 </div>
                             <% end %>
-                        <%= form_for @comment do |f| %>
-                            <%= f.hidden_field :post_id, value: "#{post.id}" %>
-                            <%= f.text_field :content %>
-                            <%= f.submit "Comment" %> 
+                        <% if current_user %>
+                            <%= form_for @comment do |f| %>
+                                <%= f.hidden_field :post_id, value: "#{post.id}" %>
+                                <%= f.text_field :content %>
+                                <%= f.submit "Comment" %> 
+                            <% end %>
                         <% end %>
-                         <footer class="card-footer">                        
-                            <a class="button is-warning" style="margin:.5em;position:relative;left:27em;" href="posts/<%=post.id%>/edit" class="card-footer-item">Edit</a>
-                            <a class="button is-danger" style="margin:.5em;position:relative;left:27em;" href="posts/delete" class="card-footer-item">Delete</a>
-                        </footer>
+                        <% if current_user == @user %>
+                            <footer class="card-footer">                        
+                                <a class="button is-warning" style="margin:.5em;position:relative;left:27em;" href="posts/<%=post.id%>/edit" class="card-footer-item">Edit</a>
+                                <a class="button is-danger" style="margin:.5em;position:relative;left:27em;" href="posts/delete" class="card-footer-item">Delete</a>
+                            </footer>
+                        <% end %>
                         </div>
                     <% end %>
 
-            <% if current_user.id == @user.id %>
+            <% if current_user == @user %>
                 <%= render template: 'posts/new' %>
             <% end %>
             </div>

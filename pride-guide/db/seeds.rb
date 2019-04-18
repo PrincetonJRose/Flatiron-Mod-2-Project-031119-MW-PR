@@ -52,6 +52,9 @@ Orientation.create(name:'Asexual')
 Orientation.create(name:'Demisexual')
 Orientation.create(name:'Queer')
 
+Resource.destroy_all
+State.destroy_all
+
 Resource.create(name:'The Trevor Project', number:'1-866-488-7386', url:'https://www.thetrevorproject.org', address:'', city: '', state:'', country:'', description: 'The Trevor Project offers accredited life-saving, life-affirming programs and services to LGBTQ youth that create safe, accepting and inclusive environments over the phone, online and through text.', image: "trevor_project.png")
 
  Resource.create(name:'LGBT National Help Center', number:'1-800-246-7743', url:'https://www.glbthotline.org', address:'', city: '', state:'', country:'', description:'The Lesbian, Gay, Bisexual and Transgender (LGBT) National Help Center, founded in 1996, is a non-profit, tax-exempt organization that provides vital peer-support, community connections and resource information to people with questions regarding sexual orientation and/or gender identity. Utilizing a diverse group of LGBT volunteers, we operate three national hotlines, the LGBT National Hotline, the LGBT National Youth Talkline, and the LGBT National Senior Hotline as well as private, volunteer one-to-one online chat, that helps both youth and adults with coming-out issues, safer-sex information, school bullying, family concerns, relationship problems and a lot more.', image: "lgbt-institute.jpg")
