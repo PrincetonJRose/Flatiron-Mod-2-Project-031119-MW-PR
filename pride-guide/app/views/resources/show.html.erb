@@ -26,34 +26,38 @@
         <%= f.submit "Submit Review" %>
     <% end %>
 <% end %>
+<% numbers = [1,2,3,4,5] %>
 <% if current_user %>
-    <% numbers = [1,2,3,4,5] %>
-        <p><b>Other User Reviews:</b></p>
-    <% if @resource.reviews.size == 0 %>
-        <p>No users have reviewed this location yet.</p>
-        <% if current_user %>
-            <%= form_for @review do |f| %>
-                <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
-                <p><%= f.label "You can be the first to review!" %></p>
-                <br>
-                <p><%= f.label "Rating: " %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
-                <br>
-                <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
-                <%= f.submit "Submit Review" %>
-                <br>
-            <% end %>
-        <% end %>
-    <% end %>
-    <% if @resource.reviews.size != 0 %>
-        <% @resource.reviews.each do |r| %>
-            <% if r.user == current_user %>
-                <% next %>
-            <% end %>
-            <p>User: <%= r.user.username %></p>
-            <p>Rating: <%= r.rating %></p>
-            <p>Review: <%= r.content %></p>
+    <p><b>Other User Reviews:</b></p>
+<% else %>
+    <p><b>User Reviews:</b></p>
+<% end %>
+<% if @resource.reviews.size == 0 %>
+    <p>No users have reviewed this location yet.</p>
+    <% if current_user %>
+        <%= form_for @review do |f| %>
+            <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
+            <p><%= f.label "You can be the first to review!" %></p>
+            <br>
+            <p><%= f.label "Rating: " %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
+            <br>
+            <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
+            <%= f.submit "Submit Review" %>
             <br>
         <% end %>
     <% end %>
-    <br>
 <% end %>
+<% if @resource.reviews.size != 0 %>
+    <% @resource.reviews.each do |r| %>
+        <% if r.user == current_user %>
+            <% next %>
+        <% end %>
+        <% if current_user %>
+            <p>User: <%= r.user.username %></p>
+        <% end %>
+        <p>Rating: <%= r.rating %></p>
+        <p>Review: <%= r.content %></p>
+        <br>
+    <% end %>
+<% end %>
+<br>

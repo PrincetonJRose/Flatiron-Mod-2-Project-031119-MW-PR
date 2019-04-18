@@ -3,9 +3,14 @@ class ApplicationController < ActionController::Base
 
     def search
         if params[:query].present?
-            @users = User.where("username LIKE ?", "%#{params[:query]}%")
+            if current_user
+                @users = User.where("username LIKE ?", "%#{params[:query]}%")
+                @posts = Post.where("title LIKE ?", "%#{params[:query]}%")
+            else
+                @users = []
+                @posts = []
+            end
             @resources = Resource.where("name LIKE ?", "%#{params[:query]}%")
-            @posts = Post.where("title LIKE ?", "%#{params[:query]}%")
             if !params[:query].empty?
                 flash[:message] = "Search results for '#{params[:query]}'."
             end
