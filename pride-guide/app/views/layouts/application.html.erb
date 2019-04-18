@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
   <div class="container">
     
     <head>
@@ -13,10 +13,10 @@
 
 
     <div class="navbar-grid">
-    <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">  
+    <nav class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">  
       <div class="navbar-brand">
           <a class="navbar-item max-height:3em" href="/home" >
-            <%= image_tag  "nav_bar_logo_2x.png" %>
+            <%= image_tag "navbar_logo_4x.png" %>
           </a>
       </div>
       <% if current_user.present? %>
@@ -26,12 +26,14 @@
       <% end %>
         </p>
     <div class="navbar-end">
-      <p>
-        <form action="/search" method="get">
-          <input type="text" name="query" placeholder="Search the site...">
-          <input type="submit" value="Search!">
+        <form class="level-item" action="/search" method="get" style="margin:auto;">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-primary" type="text" name="query" placeholder="Search the site..."> 
+          <span class="icon is-small is-left">
+            <i class="fas fa-search"></i>
+          </span>
+          </div> 
         </form>
-      </p>
       <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             Menu
@@ -65,6 +67,7 @@
     </div>
   </div>
 </div>
+
 
           
 

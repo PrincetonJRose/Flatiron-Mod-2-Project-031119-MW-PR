@@ -1,5 +1,5 @@
 <div class="container"> 
-    <div class="wrapper" style="margin-top:10%;">
+    <div class="wrapper" style="margin-top:4%;">
         <div class="one">
             <div class="card" style="width:15em; margin-bottom:10%;">
                 <div class="card-content is-vertical-center" style="padding-bottom:0em;">
@@ -49,34 +49,32 @@
                 <% @posts.each do |post| %>
                     <div class="post-card" style="margin: 2em;">
                         <div class="post-card-header">
-                         <div class="media-left">
-                            <figure class="image is-48x48 is-rounded" style="margin:0.5em;">
-                                <%= gravatar_for post.user %>
-                            </figure>
-                        </div>
-                            <p class="title is-3" style="margin: 0.5em 0.5em 0.5em 0em">
+                            <h1 class="title is-3" style="margin: 0.5em 0.5em 0.5em 1em">
                                 <%= post.title %>
-                            </p>
+                            </h1>
                         </div>
-                       
-                        <div class="content">
+                        <hr class="divider">
+                        <div class="content" style="padding:auto;margin:auto;padding-left: 20px;padding-right: 20px;padding-top: 0px;">
                             <%= post.content %>
                         </div>
+                        <hr>
                             <% post.comments.each do |c| %>
-                                <p>
-                                    <strong><%= c.user.username %></strong>
-                                    <%= c.content %>
-                                </p>
+                                <div class="card">
+                                    <div class="" style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;padding-right: 10px;">
+                                        <%= c.user.username %><br>
+                                    </div>
+                                        <%= c.content %>
+                                    </p>
+                                </div>
                             <% end %>
-                           
                         <%= form_for @comment do |f| %>
                             <%= f.hidden_field :post_id, value: "#{post.id}" %>
                             <%= f.text_field :content %>
                             <%= f.submit "Comment" %> 
                         <% end %>
                          <footer class="card-footer">                        
-                            <a class="button is-warning" style="margin:.5em;" href="posts/<%=post.id%>/edit" class="card-footer-item">Edit</a>
-                            <a class="button is-danger" style="margin:.5em;" href="posts/delete" class="card-footer-item">Delete</a>
+                            <a class="button is-warning" style="margin:.5em;position:relative;left:27em;" href="posts/<%=post.id%>/edit" class="card-footer-item">Edit</a>
+                            <a class="button is-danger" style="margin:.5em;position:relative;left:27em;" href="posts/delete" class="card-footer-item">Delete</a>
                         </footer>
                         </div>
                     <% end %>

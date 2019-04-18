@@ -20,15 +20,19 @@
     grid-row: auto;
 }
 
-.post-card-header {
+.post-card-divider {
     background-color: rgba(128,	0,	128, 0.5);
     align-items: stretch;
     box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
     display: flex;
-    border-radius: 0px 10px 0px 0px; 
 }
-
-  .post-card {
+hr{ 
+    height: 2px;
+    color:black;
+    background-color:black;
+    border: none;
+}
+ .post-card {
     background-color: white;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
     color: #4a4a4a;
@@ -72,4 +76,6 @@ html, body {
     box-sizing:border-box;
 }
 
-
+.post-content{
+    margin: auto;
+}
