@@ -5,6 +5,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
       t.belongs_to :resource, foreign_key: true
       t.integer :rating
       t.text :content
+      t.timestamps
     end
   end
 end

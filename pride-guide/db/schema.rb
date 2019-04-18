@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2019_04_17_184048) do
     t.integer "user_id"
     t.integer "post_id"
     t.integer "review_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["review_id"], name: "index_likes_on_review_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
@@ -153,6 +155,8 @@ ActiveRecord::Schema.define(version: 2019_04_17_184048) do
     t.integer "resource_id"
     t.integer "rating"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_reviews_on_resource_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end

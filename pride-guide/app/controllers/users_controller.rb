@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authorize!, except: [:index, :show, :new, :create]
+    before_action :authorize!, except: [:new, :create]
 
     def index
         if params[:query]
@@ -26,6 +26,9 @@ class UsersController < ApplicationController
     end
 
     def new
+        if current_user
+            redirect_to home_path
+        end
         @user = User.new
     end
 

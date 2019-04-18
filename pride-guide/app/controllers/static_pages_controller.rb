@@ -20,4 +20,11 @@ class StaticPagesController < ApplicationController
     render :contact
   end
 
+  def glossary
+    render :glossary
+    @genders = Gender.all
+    @pronouns = Pronoun.all
+    @orientations = Orientation.all
+  end
+
 end

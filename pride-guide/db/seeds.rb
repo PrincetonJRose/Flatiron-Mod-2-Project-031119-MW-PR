@@ -7,31 +7,28 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-######## List of destroy all for each table ######
+User.destroy_all
+Friend.destroy_all
+Comment.destroy_all
+Like.destroy_all
+Review.destroy_all
+Post.destroy_all
+Resource.destroy_all
+ResourceService.destroy_all
+ResourceGender.destroy_all
+ResourceOrientation.destroy_all
+Service.destroy_all
+Gender.destroy_all
+Pronoun.destroy_all
+Orientation.destroy_all
+CustomGender.destroy_all
+CustomPronoun.destroy_all
+CustomOrientation.destroy_all
+CustomUserGender.destroy_all
+CustomUserPronoun.destroy_all
+CustomUserOrientation.destroy_all
+State.destroy_all
 
-# User.destroy_all
-# Post.destroy_all
-# Comment.destroy_all
-# Review.destroy_all
-# Friend.destroy_all
-# Resource.destroy_all
-# ResourceService.destroy_all
-# ResourceGender.destroy_all
-# ResourceOrientation.destroy_all
-# Service.destroy_all
-# Gender.destroy_all
-# Pronoun.destroy_all
-# Orientation.destroy_all
-# CustomGender.destroy_all
-# CustomPronoun.destroy_all
-# CustomOrientation.destroy_all
-# CustomUserGender.destroy_all
-# CustomUserPronoun.destroy_all
-# CustomUserOrientation.destroy_all
-# Like.destroy_all
-# State.destroy_all
-
-##############################################
 
 
 Pronoun.create(name: 'he/him/his')
