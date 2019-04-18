@@ -20,7 +20,9 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         @posts = @user.posts
         @post = Post.new
-        @comment = current_user.comments.build
+        if current_user
+            @comment = current_user.comments.build
+        end       
     end
 
     def new
@@ -63,6 +65,9 @@ class UsersController < ApplicationController
 
     def edit
         @user = User.find(params[:id])
+        if current_user !=  @user
+            redirect_to user_path(@user)
+        end
     end
 
     def update

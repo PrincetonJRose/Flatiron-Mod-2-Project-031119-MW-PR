@@ -1,0 +1,42 @@
+<div class="card" style="margin-bottom:10%;">
+    <div class="card-content is-vertical-center" style="width: 248px; margin: auto; padding-bottom:0em; padding-top:5em;">
+        <figure class="image is-200x200">
+            <%= gravatar_for @user %>    
+        </figure>
+    </div> 
+    <div class="card-content is-vertical-center" style="width: 248px; margin: auto; padding-top: .5em; padding-bottom:.5em;">
+        <p class="title is-4 has-text-centered"><%=@user.username%></p>
+    </div>
+    <div class="card-content is-vertical-center" style="width: 248px; margin: auto; padding-top:1em;">
+        <p class="has-text-centered"><%= @user.bio %></p>
+    </div>
+    <% if @user != current_user %>
+        <%= form_tag "/add/#{@user.id}", method: :post %>
+            <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
+        <% end %>                
+    </div>
+    <div class="card">
+        <div class="card-header has-text-centered">
+            <p class="card-header-title is-3">Friends</p>
+        </div>
+    <ul>
+        <div class="column is-one-half">
+            <% @user.friends.take(5).each do |friend|%>
+            <div class="card-content is-flex is-horizontal-center">
+                <li>
+                    <%= link_to user_path(friend) do %>
+                        <figure class="media">
+                            <p class="image is-64x64 center">
+                                <%= gravatar_for friend %>
+                            </p>
+                            <p class="content" style="margin:1em;">
+                                <%= friend.username %>
+                            </p>
+                        </figure>
+                    <% end %>
+                </li>
+            </div>
+        </div>
+            <% end %>
+    </ul>
+</div>

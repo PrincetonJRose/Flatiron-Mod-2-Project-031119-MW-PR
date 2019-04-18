@@ -7,6 +7,21 @@ class PostsController < ApplicationController
         else
             @errors = "Post did not submit.  =("
         end
+    end
+
+    def edit
+        @post = Post.find(params[:id])
+    end
+    
+    def update
+        @post = Post.update(post_params)
+        redirect_to user_path(current_user)
+    end
+
+
+    def destroy 
+        @post = Post.find(params[:id])
+        @post.destroy
         redirect_to user_path(current_user)
     end
 

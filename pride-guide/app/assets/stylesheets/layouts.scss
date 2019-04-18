@@ -1,0 +1,53 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+
+  .navbar-grid {
+    grid-column: 2/12 ;
+    grid-row: 1;
+  }
+
+  .navbar-item img {
+    max-height: 4em;
+  }
+
+  .navbar-item.has-dropdown {
+    padding: 1em;
+    margin: auto;
+  }
+
+  .image img {
+    display: block;
+    height: auto;
+    width: 100%;
+    border: 2px red;
+  }
+  
+  .app_footer {
+    width: 100%;
+    background:grey;
+    position: fixed; 
+    bottom: 0;
+    height: 15em;
+}
+
+.sidebar1, .sidebar2 {
+    height: auto;
+    top:60px;
+    bottom:30px;
+    width: 20em;
+    position: sticky;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+.sidebar1 {
+    left:0;
+}
+
