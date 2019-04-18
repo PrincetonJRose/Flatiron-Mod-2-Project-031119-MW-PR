@@ -1,4 +1,4 @@
-class PostController < ApplicationController
+class PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         @post.user = current_user
