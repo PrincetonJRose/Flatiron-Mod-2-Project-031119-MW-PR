@@ -46,10 +46,20 @@
             <%= g.label %>
             <br>
         <% end %>
+        <% if @user.custom_genders.present? and @user.custom_genders.size > 0 %>
+            <%= f.collection_check_boxes(:custom_user_gender_ids, @user.custom_genders, :id, :name) do |cg| %>
+                <%= cg.check_box %>
+                <%= cg.label %>
+                <br>
+            <% end %>
+        <% end %>
     </p>
+    <br>
     <p>
         Not seeing something you identify with here? Enter in a new one!(up to 3)
-        
+        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
+        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
+        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
     </p>
     <br>
     <p><%= f.label "What pronouns(s) do you use? (Check all that apply)" %></p>
@@ -59,6 +69,20 @@
             <%= g.label %>
             <br>
         <% end %>
+        <% if @user.custom_pronouns.present? and @user.custom_pronouns.size > 0 %>
+            <%= f.collection_check_boxes(:custom_user_pronoun_ids, @user.custom_pronouns, :id, :name) do |cp| %>
+                <%= cp.check_box %>
+                <%= cp.label %>
+                <br>
+            <% end %>
+        <% end %>
+    </p>
+    <br>
+    <p>
+        Not seeing something you identify with here? Enter in a new one!(up to 3)
+        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
     </p>
     <br>
     <p><%= f.label "What sexual orientatio(s) do you consider yourself? (Check all that apply)" %></p>
@@ -68,6 +92,20 @@
             <%= g.label %>
             <br>
         <% end %>
+        <% if @user.custom_orientations.present? and @user.custom_orientations.size > 0 %>
+            <%= f.collection_check_boxes(:custom_user_orientation_ids, @user.custom_orientations, :id, :name) do |co| %>
+                <%= co.check_box %>
+                <%= co.label %>
+                <br>
+            <% end %>
+        <% end %>
+    </p>
+    <br>
+    <p>
+        Not seeing something you identify with here? Enter in a new one!(up to 3)
+        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
+        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
+        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
     </p>
     <br>
     <p><%= f.label "Enter some quick information about yourself:" %></p>

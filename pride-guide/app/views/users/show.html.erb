@@ -8,12 +8,61 @@
                 <div class="card-content is-vertical-center" style="padding-top: .5em; padding-bottom:.5em;">
                     <p class="title is-4 has-text-centered"><%=@user.username%></p>
                 </div>
-                <div class="card-content is-vertical-center" style="padding-top:1em;">
-                    <p class="has-text-centered"><%= @user.bio %></p>
-                </div>
-                <div class="content" style="margin-left:1em;">
-                    <p>City: <%= @user.city %></p>    
-                </div>
+                <% if @user.bio and @user.bio != '' %>
+                    <div class="card-content is-vertical-center" style="padding-top:1em;">
+                        <p class="has-text-centered"><%= @user.bio %></p>
+                    </div>
+                <% end %>
+                <% if @user.private_profile == false or (@user.friends.include?(current_user) or @user.frienders.include?(current_user)) or @user == current_user %>
+                    <div class="content" style="margin-left:1em;">
+                        <% if @user.birthdate %>
+                            <p>DOB: <%= @user.birthdate %></p>
+                        <% end %>
+                        <% if @user.city and @user.city != '' %>
+                            <p>City: <%= @user.city %></p>
+                        <% end %>
+                        <% if @user.state_id %>
+                            <p>State: <%= @user.state.state_name %></p>
+                        <% end %>
+                        <br>
+                        <% if @user.genders.size > 0 or @user.custom_genders.size > 0 %>
+                            <p>Gender(s):</p>
+                            <ul>
+                                <% @user.genders.each do |g| %>
+                                    <li><%= g.name.capitalize %></li>
+                                <% end %>
+                                <% @user.custom_genders.each do |cg| %>
+                                    <li><%= cg.name %></li>
+                                <% end %>
+                            </ul>
+                            <br>
+                        <% end %>
+                        <% if @user.pronouns.size > 0 or @user.custom_pronouns.size > 0 %>
+                            <p>Pronoun(s):</p>
+                            <ul>
+                                <% @user.pronouns.each do |p| %>
+                                    <li><%= p.name.capitalize %></li>
+                                <% end %>
+                                <% @user.custom_pronouns.each do |cp| %>
+                                    <li><%= cp.name %></li>
+                                <% end %>
+                            </ul>
+                            <br>
+                        <% end %>
+                        <% if @user.orientations.size > 0 or @user.custom_orientations.size > 0 %>
+                            <p>Orientation(s):</p>
+                            <ul>
+                                <% @user.orientations.each do |o| %>
+                                    <li><%= o.name.capitalize %></li>
+                                <% end %>
+                                <% @user.custom_orientations.each do |co| %>
+                                    <li><%= co.name %></li>
+                                <% end %>
+                            </ul>
+                            <br>
+                        <% end %>
+                    </div>
+                <% end %>
                 <% if @user != current_user && current_user && !@user.friends.include?(current_user) && !@user.frienders.include?(current_user)%>
                     <%= form_tag "/add/#{@user.id}", method: :post %>
                         <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>

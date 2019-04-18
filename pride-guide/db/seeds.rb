@@ -5,6 +5,35 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+######## List of destroy all for each table ######
+
+# User.destroy_all
+# Post.destroy_all
+# Comment.destroy_all
+# Review.destroy_all
+# Friend.destroy_all
+# Resource.destroy_all
+# ResourceService.destroy_all
+# ResourceGender.destroy_all
+# ResourceOrientation.destroy_all
+# Service.destroy_all
+# Gender.destroy_all
+# Pronoun.destroy_all
+# Orientation.destroy_all
+# CustomGender.destroy_all
+# CustomPronoun.destroy_all
+# CustomOrientation.destroy_all
+# CustomUserGender.destroy_all
+# CustomUserPronoun.destroy_all
+# CustomUserOrientation.destroy_all
+# Like.destroy_all
+# State.destroy_all
+
+##############################################
+
+
 Pronoun.create(name: 'he/him/his')
 Pronoun.create(name: 'she/her/hers')
 Pronoun.create(name: 'they/them/theirs')
@@ -52,10 +81,7 @@ Orientation.create(name:'Asexual')
 Orientation.create(name:'Demisexual')
 Orientation.create(name:'Queer')
 
-Resource.destroy_all
-State.destroy_all
-
-Resource.create(name:'The Trevor Project', number:'1-866-488-7386', url:'https://www.thetrevorproject.org', address:'', city: '', state:'', country:'', description: 'The Trevor Project offers accredited life-saving, life-affirming programs and services to LGBTQ youth that create safe, accepting and inclusive environments over the phone, online and through text.', image: "trevor_project.png")
+Resource.create(name:'The Trevor Project', number:'1-866-488-7386', url:'https://www.thetrevorproject.org', address:'', city: '', state:'', country:'', description: 'The Trevor Project offers accredited life-saving, life-affirming programs and services to LGBTQ youth that create safe, accepting and inclusive environments over the phone, online and through text.', image: "trevor-project.png")
 
  Resource.create(name:'LGBT National Help Center', number:'1-800-246-7743', url:'https://www.glbthotline.org', address:'', city: '', state:'', country:'', description:'The Lesbian, Gay, Bisexual and Transgender (LGBT) National Help Center, founded in 1996, is a non-profit, tax-exempt organization that provides vital peer-support, community connections and resource information to people with questions regarding sexual orientation and/or gender identity. Utilizing a diverse group of LGBT volunteers, we operate three national hotlines, the LGBT National Hotline, the LGBT National Youth Talkline, and the LGBT National Senior Hotline as well as private, volunteer one-to-one online chat, that helps both youth and adults with coming-out issues, safer-sex information, school bullying, family concerns, relationship problems and a lot more.', image: "lgbt-institute.jpg")
 
