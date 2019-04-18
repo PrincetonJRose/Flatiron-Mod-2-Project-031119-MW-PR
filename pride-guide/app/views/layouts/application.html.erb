@@ -81,6 +81,7 @@
       <div class="alert alert-<%= message_type %>"><%= message %>
       </p></div>
     <% end %>
+    <% flash[:message] = '' %>
 
     <%= yield %>
   </body>
