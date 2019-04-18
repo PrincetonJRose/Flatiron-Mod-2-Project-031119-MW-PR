@@ -30,6 +30,30 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            if params[:custom_gender].present?
+                params[:custom_gender].each do |cg_name|
+                    @cg = CustomGender.new(name: cg_name)
+                    @cg.save
+                    @ucg = CustomUserGender.new(custom_gender_id: @cg.id, user_id: @user.id)
+                    @ucg.save
+                end
+            end
+            if params[:custom_pronoun].present?
+                params[:custom_pronoun].each do |cp_name|
+                    @cp = CustomPronoun.new(name: cp_name)
+                    @cp.save
+                    @ucp = CustomUserPronoun.new(custom_pronoun_id: @cp.id, user_id: @user.id)
+                    @ucp.save
+                end
+            end
+            if params[:custom_orientation].present?
+                params[:custom_orientation].each do |co_name|
+                    @co = CustomOrientation.new(name: co_name)
+                    @co.save
+                    @uco = CustomUserOrientation.new(custom_orientation_id: @co.id, user_id: @user.id)
+                    @uco.save
+                end
+            end
             flash[:success] = "Welcome to Pride Guide!!!  ^_^"
             redirect_to login_path
         else

@@ -47,9 +47,12 @@
             <br>
         <% end %>
     </p>
+    <br>
     <p>
         Not seeing something you identify with here? Enter in a new one!(up to 3)
-        
+        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
+        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
+        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
     </p>
     <br>
     <p><%= f.label "What pronouns(s) do you use? (Check all that apply)" %></p>
@@ -61,6 +64,13 @@
         <% end %>
     </p>
     <br>
+    <p>
+        Not seeing something you identify with here? Enter in a new one!(up to 3)
+        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+    </p>
+    <br>
     <p><%= f.label "What sexual orientatio(s) do you consider yourself? (Check all that apply)" %></p>
     <p>
         <%= f.collection_check_boxes(:orientation_ids, Orientation.all, :id, :name) do |g| %>
@@ -68,6 +78,13 @@
             <%= g.label %>
             <br>
         <% end %>
+    </p>
+    <br>
+    <p>
+        Not seeing something you identify with here? Enter in a new one!(up to 3)
+        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
+        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
+        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
     </p>
     <br>
     <p><%= f.label "Enter some quick information about yourself:" %></p>
