@@ -46,6 +46,13 @@
             <%= g.label %>
             <br>
         <% end %>
+        <% if @user.custom_genders.present? and @user.custom_genders.size > 0 %>
+            <%= f.collection_check_boxes(:custom_user_gender_ids, @user.custom_genders, :id, :name) do |cg| %>
+                <%= cg.check_box %>
+                <%= cg.label %>
+                <br>
+            <% end %>
+        <% end %>
     </p>
     <br>
     <p>
@@ -62,6 +69,13 @@
             <%= g.label %>
             <br>
         <% end %>
+        <% if @user.custom_pronouns.present? and @user.custom_pronouns.size > 0 %>
+            <%= f.collection_check_boxes(:custom_user_pronoun_ids, @user.custom_pronouns, :id, :name) do |cp| %>
+                <%= cp.check_box %>
+                <%= cp.label %>
+                <br>
+            <% end %>
+        <% end %>
     </p>
     <br>
     <p>
@@ -77,6 +91,13 @@
             <%= g.check_box %>
             <%= g.label %>
             <br>
+        <% end %>
+        <% if @user.custom_orientations.present? and @user.custom_orientations.size > 0 %>
+            <%= f.collection_check_boxes(:custom_user_orientation_ids, @user.custom_orientations, :id, :name) do |co| %>
+                <%= co.check_box %>
+                <%= co.label %>
+                <br>
+            <% end %>
         <% end %>
     </p>
     <br>
