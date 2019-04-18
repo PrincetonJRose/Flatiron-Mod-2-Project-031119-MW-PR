@@ -1,62 +1,85 @@
-<% if @resource.image %>
-    <p align="center"><%= image_tag @resource.image %></p>
-<% end %>
-<h1 align="center"><b><u><%= @resource.name %></u></b></h1>
-<br>
-<p><b>Phone #:  </b> <%= @resource.number %> </p>
-<p><b>Website:  </b> <a href="<%= @resource.url %>"> <%= @resource.url %> </a> </p>
-<p><b>Address:  </b><%= @resource.address %></p>
-<p><b>City:  </b> <%= @resource.city %></p>
-<p><b>State:  </b> <%= @resource.state %></p>
-<p><b>Country:  </b> <%= @resource.country %></p>
-<p><a href="https://www.google.com/maps/search/?api=1&query=<%= @map_location %>">Click here to go to Google Maps!</a></p>
-<br>
-<p><b>Description: </b> <%= @resource.description %></p>
-<br>
-<% if current_user and @users_review %>
-    <p>Your rating: <%= @users_review.rating %> </p>
-    <p>Your review: <%= @users_review.content %> </p>
-    <br>
-<% elsif current_user and @resource.reviews.size != 0 %>
-    <%= form_for @review do |f| %>
-        <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
-        <p><%= f.label "Write your own review:" %></p>
-        <p><%= f.select :rating, 1..5 %> </p>
-        <p><%= f.text_area :content, size: "40x5" %></p>
-        <%= f.submit "Submit Review" %>
+<div class="container">
+    <% if @resource.image %>
+        <div class="box">
+            <div class="card-header" style="margin:2em;">
+                <h1 class="title is-1 center"><%= @resource.name %></h1>
+            </div>
+            <figure class="resource-image" style="margin-bottom:5em;">
+                    <img src="/assets/<%=@resource.image%>" alt="<%= @resource.name%>">
+            </figure>
+        </div>
     <% end %>
-<% end %>
-<% numbers = [1,2,3,4,5] %>
-<% if current_user %>
-    <p><b>Other User Reviews:</b></p>
-<% else %>
-    <p><b>User Reviews:</b></p>
-<% end %>
-<% if @resource.reviews.size == 0 %>
-    <p>No users have reviewed this location yet.</p>
-    <% if current_user %>
-        <%= form_for @review do |f| %>
-            <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
-            <p><%= f.label "You can be the first to review!" %></p>
-            <br>
-            <p><%= f.label "Rating: " %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
-            <br>
-            <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
-            <%= f.submit "Submit Review" %>
-            <br>
-        <% end %>
-    <% end %>
-<% end %>
-<% if @resource.reviews.size != 0 %>
-    <% @resource.reviews.each do |r| %>
-        <% if r.user == current_user %>
-            <% next %>
-        <% end %>
-        <p><b>User: <%= r.user.username %></b></p>
-        <p>Rating: <%= r.rating %></p>
-        <p>Review: <%= r.content %></p>
-        <br>
-    <% end %>
-<% end %>
-<br>
+    <div class="wrapper">
+        <div class="one">
+            <div class="resource-card">
+                <p><b>Phone #:  </b> <%= @resource.number %> </p>
+                <p><b>Website:  </b> <a href="<%= @resource.url %>"> <%= @resource.url %> </a> </p>
+                <p><b>Address:  </b><%= @resource.address %></p>
+                <p><b>City:  </b> <%= @resource.city %></p>
+                <p><b>State:  </b> <%= @resource.state %></p>
+                <p><b>Country:  </b> <%= @resource.country %></p>
+                <p><a href="https://www.google.com/maps/search/?api=1&query=<%= @map_location %>">Click here to go to Google Maps!</a></p>
+                <p><b>Description: </b> <%= @resource.description %></p>
+            </div>
+        </div>
+        <div class="two">
+            <div class="resource-card">
+                <% if current_user and @users_review %>
+                    <p>Your rating: <%= @users_review.rating %> </p>
+                    <p>Your review: <%= @users_review.content %> </p>
+                    <br>
+                <% elsif current_user and @resource.reviews.size != 0 %>
+                    <%= form_for @review do |f| %>
+                        <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
+                        <p><%= f.label "Write your own review:" %></p>
+                        <p><%= f.select :rating, 1..5 %> </p>
+                        <p><%= f.text_area :content, size: "40x5" %></p>
+                        <%= f.submit "Submit Review" %>
+                    <% end %>
+                <% end %>
+                <% numbers = [1,2,3,4,5] %>
+                <% if current_user %>
+                    <p><b>Other User Reviews:</b></p>
+                <% else %>
+                    <p><b>User Reviews:</b></p>
+                <% end %>
+                <% if @resource.reviews.size == 0 %>
+                    <p>No users have reviewed this location yet.</p>
+                    <% if current_user %>
+                        <%= form_for @review do |f| %>
+                            <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
+                            <p><%= f.label "You can be the first to review!" %></p>
+                            <br>
+                            <p><%= f.label "Rating: " %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
+                            <br>
+                            <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
+                            <%= f.submit "Submit Review" %>
+                            <br>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @resource.reviews.size != 0 %>
+                    <% @resource.reviews.each do |r| %>
+                        <% if r.user == current_user %>
+                            <% next %>
+                        <% end %>
+                        <p><b>User: <%= r.user.username %></b></p>
+                        <p>Rating: <%= r.rating %></p>
+                        <p>Review: <%= r.content %></p>
+                        <br>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="three"> 
+            <div class="resource-card">
+                
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
 

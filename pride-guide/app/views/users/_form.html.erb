@@ -1,115 +1,149 @@
-<% if @user.errors.any? %>
-    <div id="error_explanation">
-    <h3 style="color: red">There were some errors with the information you entered into the form:</h2>
-    <ul>
-        <% @user.errors.full_messages.each do |message| %>
-        <li>
-            <p style="color:red"><%= message %></p>
-        </li>
-        <% end %>
-    </ul>
-    </div>
-    <br>
-<% end %>
+<div class="container">
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+        <h3 style="color: red">There were some errors with the information you entered into the form:</h2>
+        <ul>
+            <% @user.errors.full_messages.each do |message| %>
+            <li>
+                <p style="color:red"><%= message %></p>
+            </li>
+            <% end %>
+        </ul>
+        </div>
+        <br>
+    <% end %>
 
 
-<%= form_for(@user) do |f| %>
-    <p><%= f.label "Enter your user name:" %></p>
-    <p>(must be between 6-16 characters long)</p>
-    <p><%= f.text_field :username %></p>
-    <p><%= f.label "Enter your email address:" %></p>
-    <p><%= f.text_field :email %></p>
-    <p><%= f.label "Enter your password:" %><br>
-    (must be between 6-16 characters long)</p>
-    <p><%= f.password_field :password %></p>
-    <p><%= f.label "Confirm your password:" %></p>
-    <p><%= f.password_field :password_confirmation %></p>
-    <br>
-    <p>(The following fields are optional)</p>
-    <br>
-    <p><%= f.label "Enter your first name:" %></p>
-    <p><%= f.text_field :first_name %></p>
-    <p><%= f.label "Enter your middle initial:" %></p>
-    <p><%= f.text_field :middle_initial %></p>
-    <p><%= f.label "Enter your last name:" %></p>
-    <p><%= f.text_field :last_name %></p>
-    <p><%= f.label "Enter your birthday:" %></p>
-    <p><%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %></p>
-    <p><%= f.label "Enter in your City and State (optional):" %></p>
-    <p>    <%= f.collection_select(:state_id, State.all, :id, :state_code, prompt: "Select State:") %>
-    <%= f.text_field :city, placeholder: 'City'%></p>
-    <br>
-    <p><%= f.label "What gender(s) do you indentifty with? (Check all that apply)" %></p>
-    <p>
-        <%= f.collection_check_boxes(:gender_ids, Gender.all, :id, :name) do |g| %>
-            <%= g.check_box %>
-            <%= g.label %>
-            <br>
-        <% end %>
-        <% if @user.custom_genders.present? and @user.custom_genders.size > 0 %>
-            <%= f.collection_check_boxes(:custom_user_gender_ids, @user.custom_genders, :id, :name) do |cg| %>
-                <%= cg.check_box %>
-                <%= cg.label %>
+    <%= form_for(@user) do |f| %>
+        <div class="subtitle is-5"><%= f.label "Enter your user name:" %><small style="font-size:x-small;margin-top:-2em;">(must be between 6-16 characters long)</small></div>
+
+            <%= f.text_field :username, class:"input is-danger", style:"width: 20em;margin-top:-1em;" %>
+
+        <div class="subtitle is-5"><%= f.label "Enter your email address:" %></div>
+
+            <%= f.text_field :email, class:"input is-danger", style:"width: 20em;margin-top:-1em;" %>
+
+        <div>
+            <%= f.label "Enter your password:", class:"subtitle is-5" %> <small style="font-size:x-small;color:grey;">(must be between 6-16 characters long)</small>    
+        </div>
+
+        <div>
+            <%= f.password_field :password, class:"input is-warning", style:"width: 20em;" %>
+        </div>
+
+        <div>
+            <%= f.label "Confirm your password:", class:"subtitle is-5" %>
+        </div>
+
+        <p>
+            <%= f.password_field :password_confirmation, class:"input is-warning", style:"width: 20em;" %>
+        </p>
+
+        <br>
+
+        <div class="subtitle is-5" style="font-weight:bold;margin-top:1em;">The following fields are optional</div>
+
+        <div class="subtitle is-5"><%= f.label "Enter your name:", style:"margin-left:.5em;"%><br>
+            <%= f.text_field :first_name, placeholder:"First Name", class:"input is-small is-success", style:"width: 15em;margin:.5em;" %><br>
+            <%= f.text_field :middle_initial, placeholder:"Middle Initial", class:"input is-small is-success", style:"width: 15em;margin:.5em;" %><br>
+            <%= f.text_field :last_name, placeholder:"Last Name", class:"input is-small is-success", style:"width: 15em;margin:.5em;" %>
+        </div>
+
+        <div class="subtitle is-5" style=";margin-top:1em;"><%= f.label "Enter your birthday:" %></div>
+        <div style="margin-top:-1.5em;">
+            <%= f.date_select(:birthdate, order: [:month, :day, :year], use_month_numbers: false, prompt: { day: 'Select day:', month: 'Select month:', year: 'Select year:' }, start_year: Date.today.year - 120, end_year: Date.today.year) %>
+        </div>
+
+
+        <div class="subtitle is-5" style=";margin-top:1em;"><%= f.label "Enter in your City and State (optional):" %></div>
+            <div style="margin-top:-1.5em;">
+                <%= f.collection_select(:state_id, State.all, :id, :state_code, prompt: "Select State:") %>
+                <%= f.text_field :city, placeholder: 'City', class:"input is-small is-success", style:"width:10em;"%>
+            </div>
+        <br>
+            <div class="subtitle is-5" style=";margin-top:1em;"><%= f.label "What gender(s) do you indentifty with? (Check all that apply)" %></div>
+        <div>
+            <%= f.collection_check_boxes(:gender_ids, Gender.all, :id, :name) do |g| %>
+                <%= g.check_box %>
+                <%= g.label %>
                 <br>
             <% end %>
-        <% end %>
-    </p>
-    <br>
-    <p>
-        Not seeing something you identify with here? Enter in a new one!(up to 3)
-        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
-        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
-        <input id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
-    </p>
-    <br>
-    <p><%= f.label "What pronouns(s) do you use? (Check all that apply)" %></p>
-    <p>
-        <%= f.collection_check_boxes(:pronoun_ids, Pronoun.all, :id, :name) do |g| %>
-            <%= g.check_box %>
-            <%= g.label %>
-            <br>
-        <% end %>
-        <% if @user.custom_pronouns.present? and @user.custom_pronouns.size > 0 %>
-            <%= f.collection_check_boxes(:custom_user_pronoun_ids, @user.custom_pronouns, :id, :name) do |cp| %>
-                <%= cp.check_box %>
-                <%= cp.label %>
+            <% if @user.custom_genders.present? and @user.custom_genders.size > 0 %>
+                <%= f.collection_check_boxes(:custom_user_gender_ids, @user.custom_genders, :id, :name) do |cg| %>
+                    <%= cg.check_box %>
+                    <%= cg.label %>
+                    <br>
+                <% end %>
+            <% end %>
+        </div>
+        <br>
+            <div class="subtitle is-6" style="font-style:italic;">
+                Not seeing something you identify with here? Enter in a new one!(up to 3)
+            </div> 
+            <input class="input is-primary is-small" style="width:10em;" id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
+            <input class="input is-primary is-small" style="width:10em;" id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
+            <input class="input is-primary is-small" style="width:10em;" id="custom_gender" name="custom_gender[]" type="text" placeholder="Gender...">
+        </p>
+        <br>
+        <div class="subtitle is-5" style=";margin-top:1em;"><%= f.label "What pronouns(s) do you use? (Check all that apply)" %></div>
+        <div>
+            <%= f.collection_check_boxes(:pronoun_ids, Pronoun.all, :id, :name) do |g| %>
+                <%= g.check_box %>
+                <%= g.label %>
                 <br>
             <% end %>
-        <% end %>
-    </p>
-    <br>
-    <p>
-        Not seeing something you identify with here? Enter in a new one!(up to 3)
-        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
-        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
-        <input id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
-    </p>
-    <br>
-    <p><%= f.label "What sexual orientatio(s) do you consider yourself? (Check all that apply)" %></p>
-    <p>
-        <%= f.collection_check_boxes(:orientation_ids, Orientation.all, :id, :name) do |g| %>
-            <%= g.check_box %>
-            <%= g.label %>
-            <br>
-        <% end %>
-        <% if @user.custom_orientations.present? and @user.custom_orientations.size > 0 %>
-            <%= f.collection_check_boxes(:custom_user_orientation_ids, @user.custom_orientations, :id, :name) do |co| %>
-                <%= co.check_box %>
-                <%= co.label %>
+            <% if @user.custom_pronouns.present? and @user.custom_pronouns.size > 0 %>
+                <%= f.collection_check_boxes(:custom_user_pronoun_ids, @user.custom_pronouns, :id, :name) do |cp| %>
+                    <%= cp.check_box %>
+                    <%= cp.label %>
+                    <br>
+                <% end %>
+            <% end %>
+        </div>
+        <br>
+        <div class="subtitle is-6" style="font-style:italic;" >
+            Not seeing something you identify with here? Enter in a new one!(up to 3)
+        </div>
+        <div>
+            <input class="input is-primary is-small" style="width:10em;" id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+            <input class="input is-primary is-small" style="width:10em;" id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+            <input class="input is-primary is-small" style="width:10em;" id="custom_pronoun" name="custom_pronoun[]" type="text" placeholder="Pronoun...">
+        </div>
+        <br>
+        <div class="subtitle is-5" style=";margin-top:1em;">
+            <%= f.label "What sexual orientation(s) do you consider yourself? (Check all that apply)" %>
+        </div>
+        <div>
+            <%= f.collection_check_boxes(:orientation_ids, Orientation.all, :id, :name) do |g| %>
+                <%= g.check_box %>
+                <%= g.label %>
                 <br>
             <% end %>
-        <% end %>
-    </p>
-    <br>
-    <p>
-        Not seeing something you identify with here? Enter in a new one!(up to 3)
-        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
-        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
-        <input id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
-    </p>
-    <br>
-    <p><%= f.label "Enter some quick information about yourself:" %></p>
-    <p><%= f.text_area :bio, size: "80x10" %></p>
-    <br>
-    <%= f.submit "Create Account" %>
-<% end %>
+            <% if @user.custom_orientations.present? and @user.custom_orientations.size > 0 %>
+                <%= f.collection_check_boxes(:custom_user_orientation_ids, @user.custom_orientations, :id, :name) do |co| %>
+                    <%= co.check_box %>
+                    <%= co.label %>
+                    <br>
+                <% end %>
+            <% end %>
+        </div>
+        <br>
+        <div class="subtitle is-6" style="font-style:italic;" >
+            Not seeing something you identify with here? Enter in a new one!(up to 3)
+        </div>
+        <div>
+            <input class="input is-primary is-small" style="width:10em;" id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
+            <input class="input is-primary is-small" style="width:10em;" id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
+            <input class="input is-primary is-small" style="width:10em;" id="custom_orientation" name="custom_orientation[]" type="text" placeholder="Orientation...">
+        </div>
+        <br>
+        <div class="subtitle is-5" style=";margin-top:1em;">
+            <%= f.label "Tell us a little about yourself:" %>
+        </div>
+        <div>
+            <%= f.text_area :bio, class:"textarea is-primary", size: "80x10" %></p>
+        </div>
+        <br>
+        <%= f.submit "Create Account", class:"button is-primary" %>
+    <% end %>
+</div>

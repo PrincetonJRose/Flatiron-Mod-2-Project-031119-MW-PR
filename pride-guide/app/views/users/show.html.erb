@@ -1,7 +1,7 @@
 <div class="container"> 
     <div class="wrapper" style="margin-top:4%;">
         <div class="one">
-            <div class="card" style="width:15em; margin-bottom:10%;">
+            <div class="profile-card" style="width:15em; margin-bottom:10%;">
                 <div class="card-content is-vertical-center" style="padding-bottom:0em;">
                         <%= gravatar_for @user %>    
                 </div> 
@@ -68,7 +68,7 @@
                         <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
                     <% end %>                
                 </div>
-                <div class="card" style="width:15em; margin-bottom:10%;">
+                <div class="profile-card" style="width:15em; margin-bottom:10%;">
                     <div class="card-header has-text-centered">
                         <p class="card-header-title is-3">Friends</p>
                     </div>
@@ -104,33 +104,24 @@
                             <h1 class="title is-3" style="margin: 0.5em 0.5em 0.5em 1em">
                                 <%= post.title %>
                             </h1>
-                            <p class="subtitile is-7">
-                            <% p = post.created_at %><%= p.strftime(" at %l:%M %P on %m/%d/%Y ") %>
                             </p>
                         </div>
                         <hr>
                         <div class="content" style="padding:auto;margin:auto;padding-left: 20px;padding-right: 20px;padding-top: 0px;">
-                            <%= post.content %>
+                            <p><%= post.content %></p>
                         </div>
-                        <hr>
+                            <p class="content is-small" style="padding:0;margin-bottom:0;margin-left:1em;color:grey;">
+                            <% p = post.created_at %><%= p.strftime("%m/%d/%Y ") %>
                             <% post.comments.each do |c| %>
                                 <div class="card">
-                                    <div class="card-content">
+                                    <div class="card-content" >
                                         <div class="media">
-                                            <div class="media-left">
-                                                <div style="margin-right:0px;padding-left: 10px;padding-top: 10px;padding-bottom: 10px;padding-right: 10px;">
-                                                    <figure class="image is-48x48">
-                                                        <%= gravatar_for c.user %>
-                                                    </figure>
-                                                    <div class="media-content">
-                                                        <h1 class="title is-5"><%= c.user.username %></h1>
-                                                        <p class="subtitle is-7" style="margin-bottom:0;"><% t = c.created_at %><%= t.strftime(" at %l:%M %P on %m/%d/%Y ") %></p>
-                                                    </div>
+                                                <div class="media-content">
+                                                    <h1 class="title is-5"><%= c.user.username %></h1>
+                                                    <p class="subtitle is-7" style="margin-bottom:0;"><% t = c.created_at %><%= t.strftime(" at %l:%M %P on %m/%d/%Y ") %></p>
                                                 </div>
-                                                    <hr style="margin:0;">
-                                            <p class="card-content"><%= c.content %></p>
+                                            <p class="card-content" style="padding-top: 0px;padding-bottom: 0px;border-top-width: 0px;margin-bottom: -10;"><%= c.content %></p>
                                         </div>
-                                            </div>
                                     </div>
                                 </div>
                             <% end %>
