@@ -9,6 +9,7 @@
             </figure>
         </div>
     <% end %>
+<<<<<<< HEAD
     <div class="wrapper">
         <div class="one">
             <div class="resource-card">
@@ -82,3 +83,41 @@
 </div>
 
 
+=======
+<% end %>
+<% numbers = [1,2,3,4,5] %>
+<% if current_user %>
+    <p><b>Other User Reviews:</b></p>
+<% else %>
+    <p><b>User Reviews:</b></p>
+<% end %>
+<% if @resource.reviews.size == 0 %>
+    <p>No users have reviewed this location yet.</p>
+    <% if current_user %>
+        <%= form_for @review do |f| %>
+            <%= f.hidden_field :resource_id, value: "#{@resource.id}" %>
+            <p><%= f.label "You can be the first to review!" %></p>
+            <br>
+            <p><%= f.label "Rating: " %><%= f.select :rating, 1..5, prompt: "# of stars" %> </p>
+            <br>
+            <p><%= f.text_area :content, placeholder: "Put your review here...", size: "80x10" %></p>
+            <%= f.submit "Submit Review" %>
+            <br>
+        <% end %>
+    <% end %>
+<% end %>
+<% if @resource.reviews.size != 0 %>
+    <% @resource.reviews.each do |r| %>
+        <% if r.user == current_user %>
+            <% next %>
+        <% end %>
+        <% if current_user %>
+            <p>User: <%= r.user.username %></p>
+        <% end %>
+        <p>Rating: <%= r.rating %></p>
+        <p>Review: <%= r.content %></p>
+        <br>
+    <% end %>
+<% end %>
+<br>
+>>>>>>> 411f1d88677a46d5d2c2ff0946b1f6cd147563ff
