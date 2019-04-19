@@ -1,0 +1,14 @@
+<div class="container">
+    <ul>
+        <% @resources.each do |resource| %>
+        <a class="box" style="margin:2em;" href="/resources/<%=resource.id%>">
+            <h1 class="title is-3">
+                <%= resource.name %>
+            </h1>
+            <p class="content is-marginless is-paddingless" >
+                <%= resource.description %>
+            </p>
+        </a>
+        <% end %>
+    </ul>
+</div>

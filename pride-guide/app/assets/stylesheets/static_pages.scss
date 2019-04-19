@@ -1,0 +1,43 @@
+// Place all the styles related to the static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.comment-grid {
+    display: grid;
+    grid-template-columns: 10% 10%;
+}
+
+.one{
+    grid-column: 1;
+}
+
+.card {
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+    color: #4a4a4a;
+    max-width: 100%;
+    position: relative;
+  }
+
+.post-card {
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+    color: #4a4a4a;
+    position: relative;
+    border: 5px solid #796680;
+    padding: 2em;
+    margin: 2em;
+  }
+
+.one {
+    grid-column: 1;
+}
+
+.two {
+    grid-column: 2;
+}
+
+.three {
+    grid-column: 3;
+}
+
+.clearfix { display: inline-block; }

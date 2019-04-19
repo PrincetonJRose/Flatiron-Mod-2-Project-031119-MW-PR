@@ -1,0 +1,190 @@
+<div class="container"> 
+    <div class="wrapper" style="margin-top:4%;">
+        <div class="one">
+            <div class="profile-card" style="width:15em; margin-bottom:10%;">
+                <div class="card-content is-vertical-center" style="padding-bottom:0em;">
+                        <%= gravatar_for @user %>    
+                </div> 
+                <div class="card-content is-vertical-center" style="padding-top: .5em; padding-bottom:.5em;">
+                    <p class="title is-4 has-text-centered"><%=@user.username%></p>
+                </div>
+                <% if @user.bio and @user.bio != '' %>
+                    <div class="card-content is-vertical-center" style="padding-top:1em;">
+                        <p class="has-text-centered box" style="font-style:italic;"><%= @user.bio %></p>
+                    </div>
+                <% end %>
+                <div class="status" style="margin-left:1em;">
+                <% if @user == current_user %>
+                    <p>Profile Status: 
+                        <% if current_user.private_profile == true %>
+                            <i>Private</i>
+                        <% else %>
+                            <i>Public</i>
+                        <% end %>
+                        <% if @user.private_profile? %>
+                            <%= form_tag user_toggle_status_path(@user), method: :patch do %>
+                                <%= hidden_field_tag :private_profile, value: false %>
+                                <%= submit_tag 'Make Public' %>
+                            <% end %>
+                        <% else %>
+                            <%= form_tag user_toggle_status_path(@user), method: :patch do %>
+                                <%= hidden_field_tag :private_profile, value: true %>
+                                <%= submit_tag 'Make Private' %>
+                            <% end %>
+                        <% end %>
+                    </p>
+                <% end %>
+                </div>
+                <% if @user.private_profile == false or (@user.friends.include?(current_user) or @user.frienders.include?(current_user)) or @user == current_user %>
+                    <div class="content" style="margin-left:1em;">
+                        <% if @user.birthdate %>
+                            <p><strong>DOB:</strong> <br> <%= @user.birthdate.to_formatted_s(:long) %></p>
+                        <% end %>
+                        <% if @user.city and @user.city != '' %>
+                            <p><strong>City:</strong> <br> <%= @user.city %></p>
+                        <% end %>
+                        <% if @user.state_id %>
+                            <p><strong>State:</strong><br> <%= @user.state.state_name %></p>
+                        <% end %>
+                        <br>
+                        <% if @user.genders.size > 0 or @user.custom_genders.size > 0 %>
+                            <strong>Gender(s):</strong>
+                            <ul>
+                                <% @user.genders.each do |g| %>
+                                    <li><%= g.name.capitalize %></li>
+                                <% end %>
+                                <% @user.custom_genders.each do |cg| %>
+                                    <li><%= cg.name %></li>
+                                <% end %>
+                            </ul>
+                            <br>
+                        <% end %>
+                        <% if @user.pronouns.size > 0 or @user.custom_pronouns.size > 0 %>
+                            <strong>Pronoun(s):</strong>
+                            <ul>
+                                <% @user.pronouns.each do |p| %>
+                                    <li><%= p.name.capitalize %></li>
+                                <% end %>
+                                <% @user.custom_pronouns.each do |cp| %>
+                                    <li><%= cp.name %></li>
+                                <% end %>
+                            </ul>
+                            <br>
+                        <% end %>
+                        <% if @user.orientations.size > 0 or @user.custom_orientations.size > 0 %>
+                            <strong>Orientation(s):</strong>
+                            <ul>
+                                <% @user.orientations.each do |o| %>
+                                    <li><%= o.name.capitalize %></li>
+                                <% end %>
+                                <% @user.custom_orientations.each do |co| %>
+                                    <li><%= co.name %></li>
+                                <% end %>
+                            </ul>
+                            <br>
+                        <% end %>
+                    </div>
+                <% end %>
+                <% if @user != current_user && current_user && !@user.friends.include?(current_user) && !@user.frienders.include?(current_user)%>
+                    <%= form_tag "/add/#{@user.id}", method: :post %>
+                        <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
+                    <% end %> 
+                <% if @user != current_user && current_user && @user.friends.include?(current_user) or @user.frienders.include?(current_user)%>
+                    <%= form_tag "/remove/#{@user.id}", method: :delete %>
+                        <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Remove Friend</button>
+                    <% end %>           
+                </div>
+                <div class="profile-card" style="width:15em; margin-bottom:10%;">
+                    <div class="card-header has-text-centered">
+                        <p class="card-header-title is-3">Friends</p>
+                    </div>
+                        <% all_friends = [] %>
+                        <% @user.friends.each do |friend| %>
+                            <% all_friends << friend %>
+                        <% end %>
+                        <% @user.frienders.each do |friend| %>
+                            <% all_friends << friend %>
+                        <% end %>
+                        <% all_friends.take(5).each do |friend|%>
+                        <div class="card-content is-flex is-horizontal-center">
+                            <%= link_to user_path(friend) do %>
+                            <div class="level">
+                                <figure class="image is-64x64" style="margin-left:.5em;">
+                                        <%= gravatar_for friend %>
+                                </figure>
+                                    <div style="margin-left:1em;">
+                                        <%= friend.username %>    
+                                    </div>
+                            </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+    
+
+
+        <div class="two">
+                <% @posts.each do |post| %>
+                    <div class="post-card" style="margin: 2em;">
+                        <div class="post-card-header">
+                            <h1 class="title is-3" style="margin: 0.5em 0.5em 0.5em 1em">
+                                <%= post.title %>
+                            </h1>
+                            </p>
+                        </div>
+                        <hr>
+                        <div class="content" style="padding:auto;margin:auto;padding-left: 20px;padding-right: 20px;padding-top: 0px;">
+                            <p><%= post.content %></p>
+                        </div>
+                        <div class="level" style="margin-bottom:0;">
+                            <p class="level-left content is-small" style="padding:0;margin-bottom:0;margin-left:1em;color:grey;">
+                            <% p = post.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= p.strftime(" %I:%M %P EST, %m/%d/%Y ") %>
+                            <p class="level-right content" style="margin-right:.5em;margin-bottom:0;padding-top:0em;padding-bottom:0em;width:10em;">
+                                <strong>Likes:</strong> <%= post.likes.count %>
+                            </p>
+                        </div>
+                            <% post.comments.each do |c| %>
+                                <div class="card">
+                                    <div class="card-content" >
+                                        <div class="media">
+                                                <div class="media-content">
+                                                    <h1 class="title is-5"><%= c.user.username %></h1>
+                                                    <p class="subtitle is-7" style="margin-bottom:0;"><% t = c.created_at %><%= t.strftime(" at %l:%M %P on %m/%d/%Y ") %></p>
+                                                </div>
+                                            <p class="card-content" style="padding-top: 0px;padding-bottom: 0px;border-top-width: 0px;margin-bottom: -10;"><%= c.content %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
+                        <footer class="card-footer">                        
+                            <% if current_user %>
+                                <%= form_for @comment do |f| %>
+                                    <%= f.hidden_field :post_id, value: "#{post.id}" %>
+                                    <div class="level">
+                                    <%= f.text_field :content, placeholder: "Leave a comment...", class:"input is-rounded is-small", style:"margin:1em;" %>
+                                    <%= f.submit "Comment", class:"button is-small is-success", style:"margin:1em;" %> 
+                                    </div>
+                                <% end %>
+                            <% end %>
+                                <%= form_tag post_likes_path(post) do %>
+                                    <%= submit_tag "Like", class:"button is-link is-small", style:"margin:1em;margin-left:0em;"%>
+                                <% end %>
+                            <% if current_user == @user %>
+                                    <%= form_for post, controller: 'posts', method: :delete do |f| %>
+                                        <%= f.submit "Delete", class:"button is-small is-danger", style:"margin:1em;position:relative;left:25em;" %>
+                                    <% end %>
+                                    <%= button_to "Edit", edit_post_path(post), method: :get, class:"button is-small is-warning", style:"margin:1em;position:relative;left:25em;" %>
+                                </footer>
+                            <% end %>
+                            </div>
+                        <% end %>
+
+            <% if current_user == @user %>
+                <%= render template: 'posts/new' %>
+            <% end %>
+                </div>
+            </div>
+        </div>            
+    </div>
+</div>   

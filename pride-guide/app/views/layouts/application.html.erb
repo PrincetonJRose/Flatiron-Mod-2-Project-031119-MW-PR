@@ -1,15 +1,131 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>PrideGuide</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html class="has-navbar-fixed-top">
+  <div class="container">
+    
+    <head>
+      <title>PrideGuide</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+      <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <div class="navbar-grid">
+    <nav class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">  
+      <div class="navbar-brand">
+          <a class="navbar-item max-height:3em" href="/home" >
+            <%= image_tag "navbar_logo_4x.png" %>
+          </a>
+      </div>
+  
+    <div class="navbar-end">
+        <form class="level-item" action="/search" method="get" style="margin:auto;">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-primary" type="text" name="query" placeholder="Search the site..."> 
+          <span class="icon is-small is-left">
+            <i class="fas fa-search"></i>
+          </span>
+          </div> 
+        </form>
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Menu
+          </a>
+        <div class="navbar-dropdown is-boxed is-right">
+          <div class="navbar-item has-text-centered">
+            <%= link_to "Home", home_path %> 
+          </div>
+          <div class="navbar-item has-text-centered">
+            <%= link_to "Resources", resources_path %> 
+          </div>
+          <div class="navbar-item has-text-centered">
+            <%= link_to "Users", users_path %> 
+          </div>
+          <div class="navbar-item has-text-centered">
+            <%= link_to "About", about_path %> 
+          </div>
+          <div class="navbar-item has-text-centered">
+            <%= link_to "Glossary", glossary_path %> 
+          </div>
+          <div class="navbar-item has-text-centered">
+            <%= link_to "Help", help_path %> 
+          </div>
+        <% if current_user %>
+        <hr class="navbar-divider">
+          <div class="navbar-item">
+            <%= link_to "Logout", login_path, method: :delete %>
+          <% end %>
+          </div>
+      </div>
+    </div>
+      <div class="navbar-item">
+        <% if current_user %>
+            <%= link_to user_path(current_user) do %>
+                <%= gravatar_for current_user %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+          
+
+     
   </head>
+<div class="container"> 
+  <body style="margin-top:5%; margin-bottom:5%;">
+    
+    <% flash.each do |message_type, message| %>
+      <p align="center" style="color: green">
+      <div class="alert title is-3 alert-<%= message_type %>"><%= message %>
+      </p></div>
+    <% end %>
+    <% flash[:message] = '' %>
+</div>
 
-  <body>
     <%= yield %>
   </body>
+  <footer class="footer">
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <div class="tile is-child">
+          <div class="content is small">
+          <h1 style="Font-family:serif;">About</h1>
+          <p>
+            Pride Guide was created by Princeton J Rose (He/Him) and Maddie Ward (She/Her) in 2019 to bring together the LGBTQIA+ community. 
+          </p>
+          </div>
+        </div>
+        <div class="tile is-child">
+          
+        </div>
+        <div class="tile is-child">    
+          <p style="align:right;">
+            <strong>Pride Guide</strong> <br>by <a href="https://github.com/PrincetonJRose">Princeton J Rose</a> and <a href="https://github.com/whatstheward">Maddie Ward</a>. 
+          </p>
+            <div class="content is-small" style="anchor: bottom;">
+            <a class="button">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span>GitHub</span>
+            </a>
+            <a class="button" href="/contact">
+              <span class="icon">
+                <i class="fas fa-at"></i>
+              </span>
+              <span>Contact Us!</span>
+             </a>
+           </p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</footer>
 </html>

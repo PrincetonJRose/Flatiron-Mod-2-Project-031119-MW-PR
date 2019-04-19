@@ -1,0 +1,154 @@
+<div class="container">
+    <div class="post-card">
+        <% if current_user %>
+            <h1 class="title is-3">
+                Your most recent activity:
+            </h1>
+            <h1 class="subtitle is-5">
+                Latest post:
+            </h1>
+            <div class="box">                
+                <% if current_user.posts.present? %>
+                    <h1 class="title is-3 is-marginless">
+                        <%= current_user.posts.last.title %>
+                    </h1>
+                    <p class="is-paddingless is-small" style="font-color:grey;"> <% p = current_user.posts.last.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= p.strftime(" %I:%M %P EST, %m/%d/%Y ") %></p>
+
+                    <div class="is-paddingless">
+                        <%= current_user.posts.last.content %>
+                    </div>
+                        <% current_user.posts.last.comments.each do |c| %>
+                        <hr style="margin-top:0em;margin-bottom:.5em">
+                        <div class="level">
+                        <figure class="image is-48x48">
+                            <%= gravatar_for c.user %>
+                        </figure>
+                        <div class="level-item level-left" style="margin-top:-1em;">
+                            <h1 class="subtitle is-5 is-paddingless" style="margin-left:.25em;font-weight:bold;">
+                                <%= c.user.username %>
+                            </h1>
+                                <p class="content is-small is-paddingless" style="margin-top:2.5em;font-color:grey;right:19em;">
+                                    <% t = c.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= t.strftime(" %I:%M %P EST, %m/%d/%Y ") %>
+                                </p>
+                            </div>
+                        </div>
+                                <p class="is-paddingless" style="text-align:justify;margin-left:0em; margin-right:0em;">
+                                    <%= c.content %>
+                                </p>
+                    <% end %>
+                <% else %>
+                    <p>You haven't made any posts yet.</p>
+                <% end %>
+            </div>
+            <h1 class="title is-3">
+                Latest review:
+            </h1>
+            <% if current_user.reviews.present? %>
+            <div class="box">
+                <h1 class="subtitle is-5">
+                    For: <%= link_to current_user.reviews.last.resource.name, resource_path(current_user.reviews.last.resource) %>
+                </h1>
+                <p class="is-paddingless"><strong>Rating:</strong><%= current_user.reviews.last.rating %></p><br>
+                <p class="is-paddingless"><%= current_user.reviews.last.content %></p>
+                <p class="content is-small is-paddingless" style="margin-top:2.5em;font-color:grey;right:15em;">
+                    <% t = current_user.reviews.last.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= t.strftime(" %I:%M %P EST, %m/%d/%Y ") %>
+                </p>
+            <% else %>
+                <p>You haven't made any reviews yet.</p>
+            <% end %>
+            </div>
+        </div>
+    <div class="post-card">
+        <h1 class="subtitle is-3">
+            Most recent posts:
+        </h1>
+            <% if Post.all.size != 0 %>
+                <% @post = Post.last %>
+            <div class="box">
+                    <h1 class="title is-3 is-marginless">
+                        <%= @post.title %>
+                    </h1>
+                        <h1 class="subtitle is-4 is-marginless" style=":20em;">
+                            By: <%= @post.user.username %>
+                        </h1>
+                    <p class="is-paddingless is-small" style="font-color:grey;"> <% p = @post.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= p.strftime(" %I:%M %P EST, %m/%d/%Y ") %></p>
+                    <p class="is-paddingless">
+                        <%= @post.content %>
+                    </p>
+                    <% if current_user.posts.present? %>
+                        <% current_user.posts.last.comments.each do |c| %>
+                        <hr style="margin-top:0em;margin-bottom:.5em">
+                        <div class="level">
+                        <figure class="image is-48x48">
+                            <%= gravatar_for c.user %>
+                        </figure>
+                        <div class="level-item level-left" style="margin-top:-1em;">
+                            <h1 class="subtitle is-5 is-paddingless" style="margin-left:.25em;font-weight:bold;">
+                                <%= c.user.username %>
+                            </h1>
+                                <p class="content is-small is-paddingless" style="margin-top:2.5em;font-color:grey;right:19em;">
+                                    <% t = c.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= t.strftime(" %I:%M %P EST, %m/%d/%Y ") %>
+                                </p>
+                            </div>
+                        </div>
+                                <p class="is-paddingless" style="text-align:justify;margin-left:0em; margin-right:0em;">
+                                    <%= c.content %>
+                                </p>
+                        <% end %>
+                    <% end %>
+            <% else %>
+                <p>No posts have been made yet. You can be the first!</p>
+                <br>
+            <% end %>
+            </div>
+    </div>
+    <div class="post-card">
+        <h1 class="subtitle is-3">
+            Most recently reviewed location:
+        </h1>
+            <% if Review.all.size != 0 %>
+            <div class="box">
+                <% @review = Review.last %>
+                <h1 class="subtitle is-5 is-marginless">
+                    For: <%= link_to @review.resource.name, resource_path(@review.resource) %>
+                </h1>
+                <p class="is-marginless is-small" style="font-color:grey;">
+                    <% t = @review.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= t.strftime(" %I:%M %P EST, %m/%d/%Y ") %>
+                </p>
+                <p class="is-marginless">
+                Review by: <%= link_to @review.user.username, user_path(@review.user) %>
+                </p>
+                <p>
+                    <strong>Rating:</strong><%= @review.rating %>
+                </p>
+                <p>
+                    <%= @review.content %>
+                </p>
+                <% else %>
+                    <p>No reviews have been posted yet. Head to the resources to be the first!</p>
+                <% end %>
+            </div>
+            <% else %>
+            <hr style="margin:0;height:.5em;background-color:red;"> 
+            <hr style="margin:0;height:.5em;background-color:orange;"> 
+            <hr style="margin:0;height:.5em;background-color:yellow;"> 
+            <hr style="margin:0;height:.5em;background-color:green;"> 
+            <hr style="margin:0;height:.5em;background-color:blue;"> 
+            <hr style="margin:0;height:.5em;background-color:purple;"> 
+            <br>
+                <h1 class="subtitle is-4" style="text-align:center;">Welcome to Pride Guide, where we we value our community members and their privacy!</h1>
+                <p style="text-align:center;>If you're already a member of our site you should <a href="/">log in</a> so you can connect with everyone.
+                If you don't have an account then <a href="/register">signing up is free</a> and will let you join in on the fun
+                and allow you to communicate with other members of the community!
+                <div class="content" style="text-align:center;margin-bottom:-1em;">
+                    <strong>=^_^=</strong>    
+                </div>
+                 <hr style="margin:0;height:.5em;background-color:red;"> 
+            <hr style="margin:0;height:.5em;background-color:orange;"> 
+            <hr style="margin:0;height:.5em;background-color:yellow;"> 
+            <hr style="margin:0;height:.5em;background-color:green;"> 
+            <hr style="margin:0;height:.5em;background-color:blue;"> 
+            <hr style="margin:0;height:.5em;background-color:purple;"> 
+                <% end %>
+    </div>
+</div>

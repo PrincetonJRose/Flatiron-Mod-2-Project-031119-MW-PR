@@ -1,0 +1,22 @@
+<% if !current_user %>
+    
+<% end %>
+<br>
+<h1 align="center">Current list of users:</h1>
+<br>
+<ul>
+    <% @users.each do |user| %>
+        <% if user == current_user %>
+            <% next %>
+        <% end %>
+        <li>
+            <p><%= link_to user.username, user_path(user) %></p>
+            <% if user.online == true %>
+                <% status = "Online" %>
+            <% else %>
+                <% status = "Offline" %>
+            <% end %>
+            <p>Status: <%= status %></p>
+        </li>
+    <% end %>
+</ul>
