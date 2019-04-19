@@ -8,6 +8,28 @@
                 <div class="card-content is-vertical-center" style="padding-top: .5em; padding-bottom:.5em;">
                     <p class="title is-4 has-text-centered"><%=@user.username%></p>
                 </div>
+                <div class="status">
+                <% if @user == current_user %>
+                    <p>Profile Status: 
+                        <% if current_user.private_profile == true %>
+                            Private
+                        <% else %>
+                            Public
+                        <% end %>
+                        <% if @user.private_profile? %>
+                            <%= form_tag user_toggle_status_path(@user), method: :patch do %>
+                                <%= hidden_field_tag :private_profile, value: false %>
+                                <%= submit_tag 'Make Public' %>
+                            <% end %>
+                        <% else %>
+                            <%= form_tag user_toggle_status_path(@user), method: :patch do %>
+                                <%= hidden_field_tag :private_profile, value: true %>
+                                <%= submit_tag 'Make Private' %>
+                            <% end %>
+                        <% end %>
+                    </p>
+                <% end %>
+                </div>
                 <% if @user.bio and @user.bio != '' %>
                     <div class="card-content is-vertical-center" style="padding-top:1em;">
                         <p class="has-text-centered"><%= @user.bio %></p>

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   end
   resources :comments, only: [:create]
 
+  resources :users do
+    patch :toggle_status
+  end
 
   get "/", to: "static_pages#login", as: "login"
     post "/", to: "sessions#create"

@@ -83,6 +83,13 @@ class UsersController < ApplicationController
         end
     end
 
+    def toggle_status
+        @user = User.find(current_user.id)
+        @user.private_profile = !@user.private_profile
+        @user.save!(validate: false)
+        redirect_to user_path(current_user)
+    end
+
     private
 
     def user_params
