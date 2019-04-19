@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   end
   resources :comments, only: [:create]
 
+  resources :users do
+    patch :toggle_status
+  end
 
   get "/", to: "static_pages#login", as: "login"
     post "/", to: "sessions#create"
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
 
   get "/register", to: "users#new", as: "register"
   post "/add/:id", to: "friends#add", as: "add_friend"
+  delete "/remove/:id", to: "friends#remove", as: "remove_friend"
 
   get "/search", to: "application#search", as: "search"
   delete "posts/:id", to: "posts#destroy", as: "destroy"

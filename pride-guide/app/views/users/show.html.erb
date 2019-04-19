@@ -8,6 +8,28 @@
                 <div class="card-content is-vertical-center" style="padding-top: .5em; padding-bottom:.5em;">
                     <p class="title is-4 has-text-centered"><%=@user.username%></p>
                 </div>
+                <div class="status">
+                <% if @user == current_user %>
+                    <p>Profile Status: 
+                        <% if current_user.private_profile == true %>
+                            Private
+                        <% else %>
+                            Public
+                        <% end %>
+                        <% if @user.private_profile? %>
+                            <%= form_tag user_toggle_status_path(@user), method: :patch do %>
+                                <%= hidden_field_tag :private_profile, value: false %>
+                                <%= submit_tag 'Make Public' %>
+                            <% end %>
+                        <% else %>
+                            <%= form_tag user_toggle_status_path(@user), method: :patch do %>
+                                <%= hidden_field_tag :private_profile, value: true %>
+                                <%= submit_tag 'Make Private' %>
+                            <% end %>
+                        <% end %>
+                    </p>
+                <% end %>
+                </div>
                 <% if @user.bio and @user.bio != '' %>
                     <div class="card-content is-vertical-center" style="padding-top:1em;">
                         <p class="has-text-centered"><%= @user.bio %></p>
@@ -66,7 +88,11 @@
                 <% if @user != current_user && current_user && !@user.friends.include?(current_user) && !@user.frienders.include?(current_user)%>
                     <%= form_tag "/add/#{@user.id}", method: :post %>
                         <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
-                    <% end %>                
+                    <% end %> 
+                <% if @user != current_user && current_user && @user.friends.include?(current_user) or @user.frienders.include?(current_user)%>
+                    <%= form_tag "/remove/#{@user.id}", method: :delete %>
+                        <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Remove Friend</button>
+                    <% end %>           
                 </div>
                 <div class="profile-card" style="width:15em; margin-bottom:10%;">
                     <div class="card-header has-text-centered">
@@ -74,7 +100,14 @@
                     </div>
                 <ul>
                     <div class="column is-one-half">
-                        <% @user.friends.take(5).each do |friend|%>
+                        <% all_friends = [] %>
+                        <% @user.friends.each do |friend| %>
+                            <% all_friends << friend %>
+                        <% end %>
+                        <% @user.frienders.each do |friend| %>
+                            <% all_friends << friend %>
+                        <% end %>
+                        <% all_friends.take(5).each do |friend|%>
                         <div class="card-content is-flex is-horizontal-center">
                             <li>
                                 <%= link_to user_path(friend) do %>

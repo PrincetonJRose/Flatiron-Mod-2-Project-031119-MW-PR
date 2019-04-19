@@ -61,7 +61,7 @@ class UsersController < ApplicationController
                 end
             end
             flash[:success] = "Welcome to Pride Guide!!!  ^_^"
-            redirect_to login_path
+            redirect_to user_path(@user)
         else
             render :new
         end
@@ -81,6 +81,13 @@ class UsersController < ApplicationController
         else
             render :edit
         end
+    end
+
+    def toggle_status
+        @user = User.find(current_user.id)
+        @user.private_profile = !@user.private_profile
+        @user.save!(validate: false)
+        redirect_to user_path(current_user)
     end
 
     private
