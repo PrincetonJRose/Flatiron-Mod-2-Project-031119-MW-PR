@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   resources :reviews, only: [:create, :edit, :destroy]
   resources :resources, only: [:index, :show, :create, :edit, :update, :destroy]
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
-  resources :posts, only: [:create, :update, :edit, :destroy]
+  resources :posts, only: [:create, :update, :edit, :destroy] do
+    resources :likes, only: [:create, :destroy] 
+  end
   resources :comments, only: [:create]
-  
+
+
   get "/", to: "static_pages#login", as: "login"
     post "/", to: "sessions#create"
     delete "/", to: "sessions#destroy", as: "logout"

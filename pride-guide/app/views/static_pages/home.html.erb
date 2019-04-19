@@ -1,56 +1,58 @@
-<% if current_user %>
-    <p>Your most recent activity:</p>
-    <br>
-    <p>Latest post:</p>
-    <% if current_user.posts.present? %>
-        <p>On: <%= current_user.posts.last.created_at %></p>
-        <p>Title: <%= current_user.posts.last.title %></p>
-        <p>Was about: <%= current_user.posts.last.content %></p>
-    <% else %>
-        <p>You haven't made any posts yet.</p>
+<div class="container">
+    <% if current_user %>
+        <p>Your most recent activity:</p>
+        <br>
+        <p>Latest post:</p>
+        <% if current_user.posts.present? %>
+            <p>On: <%= current_user.posts.last.created_at %></p>
+            <p>Title: <%= current_user.posts.last.title %></p>
+            <p>Was about: <%= current_user.posts.last.content %></p>
+        <% else %>
+            <p>You haven't made any posts yet.</p>
+        <% end %>
+        <br>
+        <p>Latest review:</p>
+        <% if current_user.reviews.present? %>
+            <p>On: <%= current_user.reviews.last.created_at %></p>
+            <p>For this location: <%= link_to current_user.reviews.last.resource.name, resource_path(current_user.reviews.last.resource) %></p>
+            <p>You said: <%= current_user.reviews.last.content %></p>
+        <% else %>
+            <p>You haven't made any reviews yet.</p>
+        <% end %>
+        <br>
+        <br>
+        <p>Most recent posts:</p>
+        <% if Post.all.size != 0 %>
+            <% @post = Post.last %>
+            <p>On: <%= @post.created_at %></p>
+            <p>Title: <%= @post.title %></p>
+            <p>By: <%= link_to @post.user.username, user_path(@post.user) %></p>
+            <p>They said: <%= @post.content %></p>
+            <br>
+        <% else %>
+            <p>No posts have been made yet. You can be the first!</p>
+            <br>
+        <% end %>
+        <p>Most recently reviewed location:</p>
+        <% if Review.all.size != 0 %>
+            <% @review = Review.last %>
+            <p>On: <%= @review.created_at %></p>
+            <p>For this location: <%= link_to @review.resource.name, resource_path(@review.resource) %></p>
+            <p>Reviewed by: <%= link_to @review.user.username, user_path(@review.user) %></p>
+            <p>They said: <%= @review.content %></p>
+            <br>
+        <% else %>
+            <p>No reviews have been posted yet. Head to the resources to be the first!</p>
+            <br>
+        <% end %>
+        <% else %>
+            <h1 align="center">Here at Pride Guide we value our community!</h1>
+            <p align="center">If you're already a member of our site you should log in so you can connect with everyone.</p>
+            <p align="center">If you don't have an account then signing up is free and will let you join in on the fun</p>
+            <p align="center">and allow you to communicate with other members of the community!</p>
+            <p align="center">^_^</p>
+            <br>
+            <p align="center"><%= link_to "Click here to sign up!", register_path %></p>
+            <p align="center">Already have an account? Click <%= link_to "here", login_path %> to log in.</p>
     <% end %>
-    <br>
-    <p>Latest review:</p>
-    <% if current_user.reviews.present? %>
-        <p>On: <%= current_user.reviews.last.created_at %></p>
-        <p>For this location: <%= link_to current_user.reviews.last.resource.name, resource_path(current_user.reviews.last.resource) %></p>
-        <p>You said: <%= current_user.reviews.last.content %></p>
-    <% else %>
-        <p>You haven't made any reviews yet.</p>
-    <% end %>
-    <br>
-    <br>
-    <p>Most recent posts:</p>
-    <% if Post.all.size != 0 %>
-        <% @post = Post.last %>
-        <p>On: <%= @post.created_at %></p>
-        <p>Title: <%= @post.title %></p>
-        <p>By: <%= link_to @post.user.username, user_path(@post.user) %></p>
-        <p>They said: <%= @post.content %></p>
-        <br>
-    <% else %>
-        <p>No posts have been made yet. You can be the first!</p>
-        <br>
-    <% end %>
-    <p>Most recently reviewed location:</p>
-    <% if Review.all.size != 0 %>
-        <% @review = Review.last %>
-        <p>On: <%= @review.created_at %></p>
-        <p>For this location: <%= link_to @review.resource.name, resource_path(@review.resource) %></p>
-        <p>Reviewed by: <%= link_to @review.user.username, user_path(@review.user) %></p>
-        <p>They said: <%= @review.content %></p>
-        <br>
-    <% else %>
-        <p>No reviews have been posted yet. Head to the resources to be the first!</p>
-        <br>
-    <% end %>
-    <% else %>
-        <h1 align="center">Here at Pride Guide we value our community!</h1>
-        <p align="center">If you're already a member of our site you should log in so you can connect with everyone.</p>
-        <p align="center">If you don't have an account then signing up is free and will let you join in on the fun</p>
-        <p align="center">and allow you to communicate with other members of the community!</p>
-        <p align="center">^_^</p>
-        <br>
-        <p align="center"><%= link_to "Click here to sign up!", register_path %></p>
-        <p align="center">Already have an account? Click <%= link_to "here", login_path %> to log in.</p>
-<% end %>
+</div>

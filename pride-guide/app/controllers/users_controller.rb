@@ -21,6 +21,7 @@ class UsersController < ApplicationController
         @posts = @user.posts
         @post = Post.new
         if current_user
+            @like = current_user.likes.build
             @comment = current_user.comments.build
         end       
     end

@@ -110,8 +110,13 @@
                         <div class="content" style="padding:auto;margin:auto;padding-left: 20px;padding-right: 20px;padding-top: 0px;">
                             <p><%= post.content %></p>
                         </div>
-                            <p class="content is-small" style="padding:0;margin-bottom:0;margin-left:1em;color:grey;">
+                        <div class="level" style="margin-bottom:0;">
+                            <p class="level-left content is-small" style="padding:0;margin-bottom:0;margin-left:1em;color:grey;">
                             <% p = post.created_at %><%= p.strftime("%m/%d/%Y ") %>
+                            <p class="level-right content" style="margin-right:.5em;margin-bottom:0;padding-top:0em;padding-bottom:0em;width:10em;">
+                                <strong>Likes:</strong> <%= post.likes.count %>
+                            </p>
+                        </div>
                             <% post.comments.each do |c| %>
                                 <div class="card">
                                     <div class="card-content" >
@@ -135,11 +140,14 @@
                                     </div>
                                 <% end %>
                             <% end %>
+                                <%= form_tag post_likes_path(post) do %>
+                                    <%= submit_tag "Like", class:"button is-link is-small", style:"margin:1em;margin-left:0em;"%>
+                                <% end %>
                             <% if current_user == @user %>
                                     <%= form_for post, controller: 'posts', method: :delete do |f| %>
-                                        <%= f.submit "Delete", class:"button is-small is-danger", style:"margin:1em;position:relative;left:15em;" %>
+                                        <%= f.submit "Delete", class:"button is-small is-danger", style:"margin:1em;position:relative;left:25em;" %>
                                     <% end %>
-                                    <%= button_to "Edit", edit_post_path(post), method: :get, class:"button is-small is-warning", style:"margin:1em;position:relative;left:15em;" %>
+                                    <%= button_to "Edit", edit_post_path(post), method: :get, class:"button is-small is-warning", style:"margin:1em;position:relative;left:25em;" %>
                                 </footer>
                             <% end %>
                             </div>
@@ -148,7 +156,7 @@
             <% if current_user == @user %>
                 <%= render template: 'posts/new' %>
             <% end %>
-                    </div>
+                </div>
             </div>
         </div>            
     </div>

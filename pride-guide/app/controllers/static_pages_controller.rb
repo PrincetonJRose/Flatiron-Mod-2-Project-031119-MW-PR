@@ -9,6 +9,7 @@ class StaticPagesController < ApplicationController
   end
   
   def home
+    @comment = current_user.comments.build
     render :home
   end
 
