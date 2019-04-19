@@ -61,7 +61,7 @@ class UsersController < ApplicationController
                 end
             end
             flash[:success] = "Welcome to Pride Guide!!!  ^_^"
-            redirect_to login_path
+            redirect_to user_path(@user)
         else
             render :new
         end

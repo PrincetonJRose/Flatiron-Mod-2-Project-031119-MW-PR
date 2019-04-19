@@ -88,7 +88,11 @@
                 <% if @user != current_user && current_user && !@user.friends.include?(current_user) && !@user.frienders.include?(current_user)%>
                     <%= form_tag "/add/#{@user.id}", method: :post %>
                         <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Add Friend</button>
-                    <% end %>                
+                    <% end %> 
+                <% if @user != current_user && current_user && @user.friends.include?(current_user) or @user.frienders.include?(current_user)%>
+                    <%= form_tag "/remove/#{@user.id}", method: :delete %>
+                        <button class="button is-primary is-rounded" type="submit" style="margin:1em;">Remove Friend</button>
+                    <% end %>           
                 </div>
                 <div class="profile-card" style="width:15em; margin-bottom:10%;">
                     <div class="card-header has-text-centered">
@@ -96,7 +100,14 @@
                     </div>
                 <ul>
                     <div class="column is-one-half">
-                        <% @user.friends.take(5).each do |friend|%>
+                        <% all_friends = [] %>
+                        <% @user.friends.each do |friend| %>
+                            <% all_friends << friend %>
+                        <% end %>
+                        <% @user.frienders.each do |friend| %>
+                            <% all_friends << friend %>
+                        <% end %>
+                        <% all_friends.take(5).each do |friend|%>
                         <div class="card-content is-flex is-horizontal-center">
                             <li>
                                 <%= link_to user_path(friend) do %>
