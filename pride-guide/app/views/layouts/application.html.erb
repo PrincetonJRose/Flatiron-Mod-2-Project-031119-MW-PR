@@ -77,15 +77,16 @@
 
      
   </head>
-
+<div class="container"> 
   <body style="margin-top:5%; margin-bottom:5%;">
     
     <% flash.each do |message_type, message| %>
       <p align="center" style="color: green">
-      <div class="alert alert-<%= message_type %>"><%= message %>
+      <div class="alert title is-3 alert-<%= message_type %>"><%= message %>
       </p></div>
     <% end %>
     <% flash[:message] = '' %>
+</div>
 
     <%= yield %>
   </body>
@@ -125,7 +126,6 @@
         </div>
       </div>
     </div>
+</div>
 </footer>
 </html>
-
-</div>

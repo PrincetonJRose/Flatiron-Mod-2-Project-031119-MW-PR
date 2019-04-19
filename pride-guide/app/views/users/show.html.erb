@@ -8,13 +8,18 @@
                 <div class="card-content is-vertical-center" style="padding-top: .5em; padding-bottom:.5em;">
                     <p class="title is-4 has-text-centered"><%=@user.username%></p>
                 </div>
-                <div class="status">
+                <% if @user.bio and @user.bio != '' %>
+                    <div class="card-content is-vertical-center" style="padding-top:1em;">
+                        <p class="has-text-centered box" style="font-style:italic;"><%= @user.bio %></p>
+                    </div>
+                <% end %>
+                <div class="status" style="margin-left:1em;">
                 <% if @user == current_user %>
                     <p>Profile Status: 
                         <% if current_user.private_profile == true %>
-                            Private
+                            <i>Private</i>
                         <% else %>
-                            Public
+                            <i>Public</i>
                         <% end %>
                         <% if @user.private_profile? %>
                             <%= form_tag user_toggle_status_path(@user), method: :patch do %>
@@ -30,25 +35,20 @@
                     </p>
                 <% end %>
                 </div>
-                <% if @user.bio and @user.bio != '' %>
-                    <div class="card-content is-vertical-center" style="padding-top:1em;">
-                        <p class="has-text-centered"><%= @user.bio %></p>
-                    </div>
-                <% end %>
                 <% if @user.private_profile == false or (@user.friends.include?(current_user) or @user.frienders.include?(current_user)) or @user == current_user %>
                     <div class="content" style="margin-left:1em;">
                         <% if @user.birthdate %>
-                            <p>DOB: <%= @user.birthdate %></p>
+                            <p><strong>DOB:</strong> <br> <%= @user.birthdate.to_formatted_s(:long) %></p>
                         <% end %>
                         <% if @user.city and @user.city != '' %>
-                            <p>City: <%= @user.city %></p>
+                            <p><strong>City:</strong> <br> <%= @user.city %></p>
                         <% end %>
                         <% if @user.state_id %>
-                            <p>State: <%= @user.state.state_name %></p>
+                            <p><strong>State:</strong><br> <%= @user.state.state_name %></p>
                         <% end %>
                         <br>
                         <% if @user.genders.size > 0 or @user.custom_genders.size > 0 %>
-                            <p>Gender(s):</p>
+                            <strong>Gender(s):</strong>
                             <ul>
                                 <% @user.genders.each do |g| %>
                                     <li><%= g.name.capitalize %></li>
@@ -60,7 +60,7 @@
                             <br>
                         <% end %>
                         <% if @user.pronouns.size > 0 or @user.custom_pronouns.size > 0 %>
-                            <p>Pronoun(s):</p>
+                            <strong>Pronoun(s):</strong>
                             <ul>
                                 <% @user.pronouns.each do |p| %>
                                     <li><%= p.name.capitalize %></li>
@@ -72,7 +72,7 @@
                             <br>
                         <% end %>
                         <% if @user.orientations.size > 0 or @user.custom_orientations.size > 0 %>
-                            <p>Orientation(s):</p>
+                            <strong>Orientation(s):</strong>
                             <ul>
                                 <% @user.orientations.each do |o| %>
                                     <li><%= o.name.capitalize %></li>
@@ -98,8 +98,6 @@
                     <div class="card-header has-text-centered">
                         <p class="card-header-title is-3">Friends</p>
                     </div>
-                <ul>
-                    <div class="column is-one-half">
                         <% all_friends = [] %>
                         <% @user.friends.each do |friend| %>
                             <% all_friends << friend %>
@@ -109,24 +107,20 @@
                         <% end %>
                         <% all_friends.take(5).each do |friend|%>
                         <div class="card-content is-flex is-horizontal-center">
-                            <li>
-                                <%= link_to user_path(friend) do %>
-                                    <figure class="media">
-                                        <p class="image is-64x64 center">
-                                            <%= gravatar_for friend %>
-                                        </p>
-                                        <p class="content" style="margin:.5em;">
-                                            <%= friend.username %>
-                                        </p>
-                                    </figure>
-                                <% end %>
-                            </li>
+                            <%= link_to user_path(friend) do %>
+                            <div class="level">
+                                <figure class="image is-64x64" style="margin-left:.5em;">
+                                        <%= gravatar_for friend %>
+                                </figure>
+                                    <div style="margin-left:1em;">
+                                        <%= friend.username %>    
+                                    </div>
+                            </div>
+                            <% end %>
                         </div>
-                    </div>
-                        <% end %>
-                </ul>
+                    <% end %>
+                </div>
             </div>
-        </div>
     
 
 

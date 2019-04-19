@@ -1,65 +1,92 @@
-<br>
-<% if current_user %>
-    <p>Users:</p>
-    <% if @users.size == 0 and @resources.size == 0 and @posts.size == 0 %>
-    <% else %>
-        <% if @users.size != 0 %>
-            <ul>
-                <% @users.each do |user| %>
-                    <% if user == current_user %>
-                        <% next %>
-                    <% end %>
-                    <li>
-                        <p><%= link_to user.username, user_path(user) %></p>
-                        <% if user.online == true %>
-                            <% status = "Online" %>
-                        <% else %>
-                            <% status = "Offline" %>
+<div class="container">
+    <% if current_user %>
+        <p class="title is-6" style="margin-top:3em;">Users:</p>
+        <% if @users.size == 0 and @resources.size == 0 and @posts.size == 0 %>
+        <% else %>
+            <% if @users.size != 0 %>
+                <ul>
+                    <% @users.each do |user| %>
+                        <% if user == current_user %>
+                            <% next %>
                         <% end %>
-                        <p>Status: <%= status %></p>
-                    </li>
-                <% end %>
-            </ul>
-        <% else %>
-            <p>No matching users were found.</p>
+                        <li>
+                            <a href="/users/<%=user.id%>">
+                            <figure class="image is-48x48">
+                                <%=gravatar_for user%>
+                            </figure> 
+                                <%= user.username %>
+                            </a>
+                            <% if user.online == true %>
+                                <% status = "Online" %>
+                            <% else %>
+                                <% status = "Offline" %>
+                            <% end %>
+                            <p>Status: <%= status %></p>
+                        </li>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>No matching users were found.</p>
+            <% end %>
+            <br>
+            <p class="title is-6" style="margin-top:3em;">Posts:</p>
+            <% if @posts.size != 0 %>
+                <ul>
+                    <% @posts.each do |post| %>
+                        <li>
+                            <a href="/users/<%=post.user.id%>">
+                                <div class="box">
+                                    <p class="subtitle is-6">Title: <%= post.title %></p>
+                                    <p class="subtitle is-6">By user: <%= link_to post.user.username, user_path(post.user) %></p>
+                                    <p><%= post.content %></p>
+                                </div>
+                            </a>
+                        </li>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>No matchings posts were found.</p>
+            <% end %>
+            <br>
+            <p class="title is-6" style="margin-top:3em;">Resources:</p>
+            <% if @resources.size != 0 %>
+                <ul>
+                    <% @resources.each do |resource| %>
+                    <a href="/resources/<%= resource.id%>">
+                        <div class="box">
+                            <h1 class="subtitle is-6">
+                                <%= resource.name %>
+                            </h1>
+                            <p class="">
+                                <%= resource.description %>
+                            </p>
+                        </div>
+                    </a>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>No matching resources were found.</p>
+            <% end %>
         <% end %>
-        <br>
-        <p>Posts:</p>
-        <% if @posts.size != 0 %>
-            <ul>
-                <% @posts.each do |post| %>
-                    <li>
-                        <p>Title: <%= post.title %></p>
-                        <p>By user: <%= link_to post.user.username, user_path(post.user) %></p>
-                        <p>Content: <%= post.content %></p>
-                    </li>
-                <% end %>
-            </ul>
-        <% else %>
-            <p>No matchings posts were found.</p>
-        <% end %>
-        <br>
+    <% else %>
         <p>Resources:</p>
         <% if @resources.size != 0 %>
             <ul>
                 <% @resources.each do |resource| %>
-                <li><%= link_to resource.name, resource_path(resource) %></li>
+                    <a href="/resources/<%= resource.id%>">
+                        <div class="box">
+                            <h1 class="subtitle is-6">
+                                <%= resource.name %>
+                            </h1>
+                            <p class="">
+                                <%= resource.description %>
+                            </p>
+                        </div>
+                    </a>
                 <% end %>
             </ul>
         <% else %>
             <p>No matching resources were found.</p>
         <% end %>
     <% end %>
-<% else %>
-    <p>Resources:</p>
-    <% if @resources.size != 0 %>
-        <ul>
-            <% @resources.each do |resource| %>
-            <li><%= link_to resource.name, resource_path(resource) %></li>
-            <% end %>
-        </ul>
-    <% else %>
-        <p>No matching resources were found.</p>
-    <% end %>
-<% end %>
-
+</div>
