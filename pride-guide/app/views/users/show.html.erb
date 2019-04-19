@@ -112,7 +112,7 @@
                         </div>
                         <div class="level" style="margin-bottom:0;">
                             <p class="level-left content is-small" style="padding:0;margin-bottom:0;margin-left:1em;color:grey;">
-                            <% p = post.created_at %><%= p.strftime("%m/%d/%Y ") %>
+                            <% p = post.created_at.in_time_zone("Eastern Time (US & Canada)") %><%= p.strftime(" %I:%M %P EST, %m/%d/%Y ") %>
                             <p class="level-right content" style="margin-right:.5em;margin-bottom:0;padding-top:0em;padding-bottom:0em;width:10em;">
                                 <strong>Likes:</strong> <%= post.likes.count %>
                             </p>

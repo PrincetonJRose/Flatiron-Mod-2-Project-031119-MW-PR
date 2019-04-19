@@ -19,12 +19,7 @@
             <%= image_tag "navbar_logo_4x.png" %>
           </a>
       </div>
-      <% if current_user.present? %>
-      <% else %>
-        <p class="navbar-item has-text-centered">
-          <%= link_to "Login", login_path %> 
-      <% end %>
-        </p>
+  
     <div class="navbar-end">
         <form class="level-item" action="/search" method="get" style="margin:auto;">
         <div class="control has-icons-left has-icons-right">

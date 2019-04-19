@@ -2,15 +2,13 @@
  <div class="post-card" style="margin: 2em;">
    <%= form_for @post do |f| %>
       <h1 class="title is-3" style="margin:.5em;">New Post:</h1><br>
-      <div class="card-header">
          <div class="level">
-            <div class="level-item">
+            <div class="level-left">
                <%= f.text_field :title, placeholder:"Title", class:"input", style:"margin-top:-2em;margin-left:1em;margin-bottom:.5em;width:20em;" %>
             </div>
          </div>
-      </div>
       <%= f.text_area :content, class:"input", style:"padding:.5em;margin:1em;width:95%;height:10em;" %>
       <%= f.submit "Create Post", class:"button is-primary", style:"margin-left:1em;margin-bottom:1em;"  %>
    <% end %>
-   </div>
+      </div>
 </div>
