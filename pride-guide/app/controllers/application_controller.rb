@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
     def authorize!
         unless current_user
-            @errors = "Login is required to view content"
+            flash[:message] = "An account is required to view this content."
             redirect_to login_path
         end
     end
